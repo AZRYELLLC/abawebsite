@@ -66,6 +66,8 @@
         progress::-moz-progress-bar { background: linear-gradient(to right, #09C285, #4DE4B2); border-radius: 12px; }
         footer { padding:80px 50px; text-align:center; opacity:0.6; font-size:1.1rem; position:relative; z-index:2; }
         canvas#particles { position:fixed; top:0; left:0; width:100%; height:100%; z-index:1; pointer-events:none; }
+
+        /* Terminal */
         .terminal {
             width:90%; 
             max-width:800px; 
@@ -149,7 +151,9 @@
             <p>Current total payout amount if the bet wins <span id="profit-amount">Loading from Solana...</span></p>
         </section>
 
-        <div class="terminal" id="terminal"></div>
+        <div class="terminal" id="terminal">
+            Loading bot log...
+        </div>
     </section>
 
     <footer>
@@ -263,28 +267,36 @@
             }
         }
 
-        // Persistent Terminal Log
-        const terminal = document.getElementById('terminal');
+        // Live Bot Log aus Supabase
+        const SUPABASE_URL = "https://bmoibbckojdahyxdgttx.supabase.co";
+        const SUPABASE_ANON_KEY = "sb_publishable_DY2yiQ2HxKZYTP1bqejDEw_I0O4Ud0z";
 
-        async function loadLog() {
+        async function loadBotLog() {
             try {
-                const response = await fetch('/log');
-                const data = await response.json();
+                const response = await fetch(`${SUPABASE_URL}/rest/v1/bot_logs?order=created_at.asc`, {
+                    headers: {
+                        "apikey": SUPABASE_ANON_KEY,
+                        "Authorization": `Bearer ${SUPABASE_ANON_KEY}`
+                    }
+                });
+                const logs = await response.json();
+                const terminal = document.getElementById('terminal');
                 terminal.innerHTML = '';
-                data.logs.forEach(line => {
-                    const lineEl = document.createElement('div');
-                    lineEl.className = 'terminal-line';
-                    lineEl.textContent = line;
-                    terminal.appendChild(lineEl);
+                logs.forEach(log => {
+                    const line = document.createElement('div');
+                    line.className = 'terminal-line';
+                    line.textContent = `[${new Date(log.created_at).toLocaleTimeString()}] ${log.message}`;
+                    terminal.appendChild(line);
                 });
                 terminal.scrollTop = terminal.scrollHeight;
             } catch (error) {
-                terminal.innerHTML = '<div class="terminal-line">Error loading log</div>';
+                console.error('Log error:', error);
+                document.getElementById('terminal').innerHTML = '<div class="terminal-line">Error loading bot log</div>';
             }
         }
 
-        loadLog();
-        setInterval(loadLog, 30000);
+        loadBotLog();
+        setInterval(loadBotLog, 10000);  // Alle 10 Sekunden aktualisieren
 
         fetchSolPrice();
         fetchPayoutData();
