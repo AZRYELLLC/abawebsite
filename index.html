@@ -116,7 +116,7 @@
         <div class="logo">AUTOBETAGENT</div>
         <nav>
             <a href="#home">Home</a>
-            <a href="https://x.com/ITSBESYILDIZ" target="_blank"><i class="fab fa-x-twitter"></i></a>
+            <a href="https://x.com/autobetagent" target="_blank"><i class="fab fa-x-twitter"></i></a>
             <a href="https://pump.fun/37smXTBasLhNQiAFHc5FHUti3JKvCvcXKRhW7YqEbonk" target="_blank"><i class="fas fa-rocket"></i> Pump.fun</a>
         </nav>
     </header>
@@ -292,7 +292,7 @@
                     line.textContent = `[${time}] ${log.message}`;
                     terminal.appendChild(line);
                 });
-                terminal.scrollTop = 0; // Neueste oben
+                terminal.scrollTop = 0;
             } catch (error) {
                 console.error('Log error:', error);
                 document.getElementById('terminal').innerHTML = '<div class="terminal-line">Error loading bot log</div>';
@@ -300,7 +300,7 @@
         }
 
         loadBotLog();
-        setInterval(loadBotLog, 10000); // Alle 10 Sekunden aktualisieren
+        setInterval(loadBotLog, 10000);
 
         fetchSolPrice();
         fetchPayoutData();
