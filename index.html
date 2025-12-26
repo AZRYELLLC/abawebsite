@@ -27,7 +27,7 @@
             margin-bottom:150px; 
         }
 
-        /* Einheitlicher Glow für ALLE Boxen – normal + starker Hover */
+        /* Einheitlicher Glow für ALLE Boxen */
         .glow-box {
             background:rgba(0,30,30,0.6); 
             border:1px solid #09C28533; 
@@ -41,7 +41,7 @@
             transform: translateY(-8px);
         }
 
-        /* Feature Cards – nur Padding (keine Start-Animation) */
+        /* Feature Cards – Padding */
         .feature-card {
             padding:50px 40px; 
             text-align:center; 
@@ -120,9 +120,51 @@
             .whitepaper-section h3 { font-size:1.6rem; }
             .terminal { height:250px; font-size:0.9rem; }
         }
+
+        /* Start Animation – Welcome Screen */
+        .welcome-screen {
+            position:fixed;
+            top:0;
+            left:0;
+            width:100vw;
+            height:100vh;
+            background:#000;
+            display:flex;
+            justify-content:center;
+            align-items:center;
+            z-index:100;
+            opacity:0;
+            pointer-events:none;
+            animation: welcomeFade 4s ease-out forwards;
+        }
+        .welcome-text {
+            font-size:6rem;
+            font-weight:700;
+            color:#09C285;
+            text-shadow: 0 0 30px #09C285, 0 0 60px #09C28566;
+            animation: welcomePulse 2s ease-in-out infinite alternate;
+        }
+        @keyframes welcomeFade {
+            0% { opacity:0; }
+            10% { opacity:1; }
+            80% { opacity:1; }
+            100% { opacity:0; pointer-events:none; }
+        }
+        @keyframes welcomePulse {
+            from { text-shadow: 0 0 30px #09C285, 0 0 60px #09C28566; }
+            to { text-shadow: 0 0 50px #09C285, 0 0 100px #09C28588; }
+        }
+        @media (max-width:768px) {
+            .welcome-text { font-size:3.5rem; }
+        }
     </style>
 </head>
 <body>
+    <!-- Welcome Start Animation -->
+    <div class="welcome-screen">
+        <div class="welcome-text">WELCOME TO AUTOBETAGENT!</div>
+    </div>
+
     <canvas id="particles"></canvas>
 
     <header>
