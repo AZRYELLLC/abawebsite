@@ -105,7 +105,7 @@
             to { opacity:1; }
         }
 
-        /* Whitepaper Section */
+        /* Whitepaper Section mit Glow */
         .whitepaper-section {
             width:90%; 
             max-width:1000px; 
@@ -115,6 +115,12 @@
             border:1px solid #09C28533; 
             border-radius:20px; 
             text-align:left;
+            backdrop-filter:blur(10px);
+            transition: box-shadow 0.5s ease;
+            box-shadow: 0 0 15px #09C28522, inset 0 0 10px #09C28511;
+        }
+        .whitepaper-section:hover {
+            box-shadow: 0 0 30px #09C285, 0 0 60px #09C28566, inset 0 0 20px #09C28544;
         }
         .whitepaper-section h2 { font-size:2.5rem; color:#09C285; margin-bottom:30px; text-align:center; }
         .whitepaper-section h3 { font-size:1.8rem; color:#09C285; margin:30px 0 15px 0; }
@@ -177,10 +183,10 @@
             Loading bot log...
         </div>
 
-        <!-- Whitepaper direkt auf der Seite -->
+        <!-- Whitepaper Section -->
         <div class="whitepaper-section">
             <h2>Whitepaper</h2>
-            
+
             <h3>Introduction</h3>
             <p>AUTOBETAGENT is the first fully automated, on-chain bot on Solana that turns creator fees into a long position on SOL price via Kalshi prediction markets.</p>
             <p>All revenue from $ABAv1 token trades is automatically claimed, swapped to USDC, and used to bet on "Will SOL hit $150 this year?".</p>
