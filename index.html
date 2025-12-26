@@ -121,7 +121,7 @@
             .terminal { height:250px; font-size:0.9rem; }
         }
 
-        /* Start Animation – Welcome Screen */
+        /* Start Animation – Welcome Screen mit Ladebalken */
         .welcome-screen {
             position:fixed;
             top:0;
@@ -130,6 +130,7 @@
             height:100vh;
             background:#000;
             display:flex;
+            flex-direction:column;
             justify-content:center;
             align-items:center;
             z-index:100;
@@ -143,6 +144,21 @@
             color:#09C285;
             text-shadow: 0 0 30px #09C285, 0 0 60px #09C28566;
             animation: welcomePulse 2s ease-in-out infinite alternate;
+            margin-bottom:50px;
+        }
+        .welcome-loader {
+            width:50%;
+            max-width:600px;
+            height:8px;
+            background:#09C28522;
+            border-radius:4px;
+            overflow:hidden;
+        }
+        .welcome-loader-bar {
+            width:0%;
+            height:100%;
+            background: linear-gradient(to right, #09C285, #4DE4B2);
+            animation: loadProgress 3s ease-out forwards;
         }
         @keyframes welcomeFade {
             0% { opacity:0; }
@@ -154,15 +170,23 @@
             from { text-shadow: 0 0 30px #09C285, 0 0 60px #09C28566; }
             to { text-shadow: 0 0 50px #09C285, 0 0 100px #09C28588; }
         }
+        @keyframes loadProgress {
+            from { width:0%; }
+            to { width:100%; }
+        }
         @media (max-width:768px) {
-            .welcome-text { font-size:3.5rem; }
+            .welcome-text { font-size:3.5rem; margin-bottom:30px; }
+            .welcome-loader { width:80%; }
         }
     </style>
 </head>
 <body>
-    <!-- Welcome Start Animation -->
+    <!-- Welcome Start Animation mit Ladebalken -->
     <div class="welcome-screen">
         <div class="welcome-text">WELCOME TO AUTOBETAGENT!</div>
+        <div class="welcome-loader">
+            <div class="welcome-loader-bar"></div>
+        </div>
     </div>
 
     <canvas id="particles"></canvas>
