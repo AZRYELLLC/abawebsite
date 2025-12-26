@@ -27,7 +27,7 @@
             margin-bottom:150px; 
         }
 
-        /* Einheitlicher Glow für ALLE Boxen – normal + intensiver Hover */
+        /* Einheitlicher Glow für ALLE Boxen – normal + starker Hover */
         .glow-box {
             background:rgba(0,30,30,0.6); 
             border:1px solid #09C28533; 
@@ -41,21 +41,12 @@
             transform: translateY(-8px);
         }
 
-        /* Feature Cards – Padding + Start-Animation */
+        /* Feature Cards – nur Padding (keine Start-Animation mehr) */
         .feature-card {
             padding:50px 40px; 
             text-align:center; 
             position:relative; 
             z-index:2; 
-            animation: cardStartGlow 2s ease-out forwards;
-        }
-        .feature-card:nth-child(1) { animation-delay: 0.5s; }
-        .feature-card:nth-child(2) { animation-delay: 0.8s; }
-        .feature-card:nth-child(3) { animation-delay: 1.1s; }
-        @keyframes cardStartGlow {
-            0% { box-shadow: 0 0 0 #09C285, 0 0 0 #09C28566, inset 0 0 0 #09C28544; }
-            50% { box-shadow: 0 0 40px #09C285, 0 0 80px #09C28588, inset 0 0 30px #09C28566; }
-            100% { box-shadow: 0 0 15px #09C28522, inset 0 0 10px #09C28511; }
         }
 
         .card-icon { font-size:4.5rem; color:#09C285; margin-bottom:30px; text-shadow: 0 0 10px #09C285; filter: drop-shadow(0 0 8px #09C28530); }
