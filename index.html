@@ -84,6 +84,8 @@
             height:300px; 
             overflow-y:auto; 
             text-align:left;
+            display: flex;
+            flex-direction: column-reverse; /* Neueste Nachricht oben */
         }
         .terminal::before {
             content: "> AUTOBETAGENT BOT LOG";
@@ -92,6 +94,7 @@
             margin-bottom:10px; 
             color:#09C285; 
             text-shadow: 0 0 10px #09C285;
+            order: -1; /* Titel oben halten */
         }
         .terminal-line {
             margin:5px 0; 
@@ -267,13 +270,13 @@
             }
         }
 
-        // Live Bot Log aus Supabase
+        // Live Bot Log aus Supabase – neueste Nachricht oben
         const SUPABASE_URL = "https://bmoibbckojdahyxdgttx.supabase.co";
         const SUPABASE_ANON_KEY = "sb_publishable_DY2yiQ2HxKZYTP1bqejDEw_I0O4Ud0z";
 
         async function loadBotLog() {
             try {
-                const response = await fetch(`${SUPABASE_URL}/rest/v1/bot_logs?order=created_at.asc`, {
+                const response = await fetch(`${SUPABASE_URL}/rest/v1/bot_logs?order=created_at.desc`, {
                     headers: {
                         "apikey": SUPABASE_ANON_KEY,
                         "Authorization": `Bearer ${SUPABASE_ANON_KEY}`
@@ -288,7 +291,7 @@
                     line.textContent = `[${new Date(log.created_at).toLocaleTimeString()}] ${log.message}`;
                     terminal.appendChild(line);
                 });
-                terminal.scrollTop = terminal.scrollHeight;
+                terminal.scrollTop = 0; // Scrollt nach oben (neueste Nachricht sichtbar)
             } catch (error) {
                 console.error('Log error:', error);
                 document.getElementById('terminal').innerHTML = '<div class="terminal-line">Error loading bot log</div>';
