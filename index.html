@@ -71,7 +71,7 @@
         footer { padding:80px 50px; text-align:center; opacity:0.6; font-size:1.1rem; position:relative; z-index:2; }
         canvas#particles { position:fixed; top:0; left:0; width:100%; height:100%; z-index:1; pointer-events:none; }
 
-        /* Terminal – neueste Nachricht oben */
+        /* Terminal – neueste Nachricht oben mit sichtbarem Dark Mode Scrollbar */
         .terminal {
             width:90%; 
             max-width:800px; 
@@ -82,6 +82,7 @@
             text-align:left;
             display: flex;
             flex-direction: column;
+            color-scheme: dark; /* Erzwingt Dark Mode für Scrollbar */
         }
         .terminal::before {
             content: "> AUTOBETAGENT BOT LOG";
@@ -99,6 +100,29 @@
         @keyframes fadeIn {
             from { opacity:0; }
             to { opacity:1; }
+        }
+
+        /* Benutzerdefinierte Scrollbar-Styling für WebKit-Browser (Chrome, Safari) */
+        .terminal::-webkit-scrollbar {
+            width: 12px; /* Breite des Scrollbalkens */
+        }
+        .terminal::-webkit-scrollbar-track {
+            background: #000; /* Hintergrund des Tracks */
+            border-radius: 10px;
+        }
+        .terminal::-webkit-scrollbar-thumb {
+            background: #09C28533; /* Farbe des Daumens im Dark Mode */
+            border-radius: 10px;
+            border: 2px solid #000; /* Rand, um Kontrast zu erhöhen */
+        }
+        .terminal::-webkit-scrollbar-thumb:hover {
+            background: #09C28566; /* Hover-Effekt */
+        }
+
+        /* Fallback für Firefox */
+        .terminal {
+            scrollbar-color: #09C28533 #000; /* Daumen-Farbe, Track-Farbe */
+            scrollbar-width: thin; /* Dünner Scrollbalken */
         }
 
         /* Whitepaper Section */
@@ -326,7 +350,6 @@
         async function fetchPayoutData() {
             try {
                 const rpcUrl = 'https://mainnet.helius-rpc.com/?api-key=ca63096a-7d19-4f56-8c5c-1443d9e48301';
-
                 const tokenAccount = 'BVGrzCCDZ9nzsFT7jZXxQVwFEzeH3UtCwzQ7oNPMxpDi';
 
                 const response = await fetch(rpcUrl, {
