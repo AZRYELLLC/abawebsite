@@ -27,7 +27,7 @@
             margin-bottom:150px; 
         }
 
-        /* Einheitlicher Glow für ALLE Boxen */
+        /* Einheitlicher Glow für ALLE Boxen – normal + starker Hover */
         .glow-box {
             background:rgba(0,30,30,0.6); 
             border:1px solid #09C28533; 
@@ -41,34 +41,12 @@
             transform: translateY(-8px);
         }
 
-        /* Feature Cards – Padding + Lade-Animation */
+        /* Feature Cards – nur Padding (keine Start-Animation) */
         .feature-card {
             padding:50px 40px; 
             text-align:center; 
             position:relative; 
             z-index:2; 
-            opacity: 0;
-            transform: translateY(50px);
-            animation: cardAppear 1s ease-out forwards;
-        }
-        .feature-card:nth-child(1) { animation-delay: 0.3s; }
-        .feature-card:nth-child(2) { animation-delay: 0.6s; }
-        .feature-card:nth-child(3) { animation-delay: 0.9s; }
-        @keyframes cardAppear {
-            0% {
-                opacity: 0;
-                transform: translateY(50px);
-                box-shadow: 0 0 0 #09C285;
-            }
-            70% {
-                opacity: 1;
-                transform: translateY(-10px);
-            }
-            100% {
-                opacity: 1;
-                transform: translateY(0);
-                box-shadow: 0 0 15px #09C28522, inset 0 0 10px #09C28511;
-            }
         }
 
         .card-icon { font-size:4.5rem; color:#09C285; margin-bottom:30px; text-shadow: 0 0 10px #09C285; filter: drop-shadow(0 0 8px #09C28530); }
