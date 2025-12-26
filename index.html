@@ -71,7 +71,7 @@
         .terminal {
             width:90%; 
             max-width:800px; 
-            margin:50px auto 100px; 
+            margin:50px auto; 
             padding:20px; 
             background:#000; 
             border:1px solid #09C28533; 
@@ -104,8 +104,27 @@
             from { opacity:0; }
             to { opacity:1; }
         }
+
+        /* Whitepaper Section */
+        .whitepaper-section {
+            width:90%; 
+            max-width:1000px; 
+            margin:80px auto; 
+            padding:40px; 
+            background:rgba(0,30,30,0.6); 
+            border:1px solid #09C28533; 
+            border-radius:20px; 
+            text-align:left;
+        }
+        .whitepaper-section h2 { font-size:2.5rem; color:#09C285; margin-bottom:30px; text-align:center; }
+        .whitepaper-section h3 { font-size:1.8rem; color:#09C285; margin:30px 0 15px 0; }
+        .whitepaper-section p { font-size:1.2rem; line-height:1.8; opacity:0.9; margin-bottom:20px; }
+        .whitepaper-section ul { font-size:1.2rem; line-height:1.8; opacity:0.9; margin-left:20px; margin-bottom:20px; }
+        .whitepaper-section li { margin-bottom:10px; }
         @media (max-width:768px) {
-            .terminal { height:250px; font-size:0.9rem; margin:30px auto 80px; }
+            .whitepaper-section { width:85%; padding:20px; }
+            .whitepaper-section h2 { font-size:2rem; }
+            .whitepaper-section h3 { font-size:1.6rem; }
         }
     </style>
 </head>
@@ -156,6 +175,42 @@
 
         <div class="terminal" id="terminal">
             Loading bot log...
+        </div>
+
+        <!-- Whitepaper direkt auf der Seite -->
+        <div class="whitepaper-section">
+            <h2>Whitepaper</h2>
+            
+            <h3>Introduction</h3>
+            <p>AUTOBETAGENT is the first fully automated, on-chain bot on Solana that turns creator fees into a long position on SOL price via Kalshi prediction markets.</p>
+            <p>All revenue from $ABAv1 token trades is automatically claimed, swapped to USDC, and used to bet on "Will SOL hit $150 this year?".</p>
+            <p>On win, all profits are used to buy back $ABAv1 tokens.</p>
+
+            <h3>How it works</h3>
+            <ul>
+                <li>Creator fees from token trades are automatically claimed every 60 seconds.</li>
+                <li>SOL is swapped to USDC via Jupiter (best rate).</li>
+                <li>USDC is used to buy YES contracts on Kalshi via DFlow.</li>
+                <li>New YES tokens are minted to the bot wallet.</li>
+                <li>Live dashboard shows current total payout if YES wins.</li>
+            </ul>
+
+            <h3>Transparency</h3>
+            <p>100% on-chain · No team tokens · No presale</p>
+            <p>All transactions are public and verifiable on Solscan. The bot wallet and all logs are visible in real-time on this website.</p>
+
+            <h3>Tokenomics</h3>
+            <p>Fair launch on Pump.fun · Creator fees fully used for the bet and buyback · Community-driven growth.</p>
+
+            <h3>Roadmap</h3>
+            <ul>
+                <li>Phase 1: Fee claiming & swap (live)</li>
+                <li>Phase 2: Automatic Kalshi bet placement</li>
+                <li>Phase 3: Raydium LP fees integration</li>
+                <li>Phase 4: More prediction markets</li>
+            </ul>
+
+            <p><strong>Not financial advice. DYOR.</strong></p>
         </div>
     </section>
 
