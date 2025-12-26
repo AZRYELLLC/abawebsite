@@ -27,7 +27,7 @@
             margin-bottom:150px; 
         }
 
-        /* Einheitlicher Glow für alle Boxen */
+        /* Einheitlicher Glow für ALLE Boxen (Karten, Price, Payout, Terminal, Whitepaper) */
         .glow-box {
             background:rgba(0,30,30,0.6); 
             border:1px solid #09C28533; 
@@ -41,7 +41,7 @@
             transform: translateY(-5px);
         }
 
-        /* Feature Cards – mit Start-Animation */
+        /* Feature Cards – nur Padding + Start-Animation (Glow kommt von .glow-box) */
         .card { 
             padding:50px 40px; 
             text-align:center; 
@@ -148,40 +148,40 @@
         <h1 class="tagline">Fueling Solana's Rise</h1>
 
         <div class="features-hero">
-            <div class="card glow-box">
+            <div class="glow-box card">
                 <i class="fas fa-shield-alt card-icon"></i>
                 <h3>100% Transparent</h3>
                 <p>All claims, swaps, and bets are fully on-chain and verifiable.</p>
             </div>
-            <div class="card glow-box">
+            <div class="glow-box card">
                 <i class="fas fa-robot card-icon"></i>
                 <h3>Fully Automated</h3>
                 <p>Bot claims fees → swaps to USDC → places Kalshi bet automatically.</p>
             </div>
-            <div class="card glow-box">
+            <div class="glow-box card">
                 <i class="fas fa-sync-alt card-icon"></i>
                 <h3>Buyback on Win</h3>
                 <p>If the Kalshi bet wins, all profits will be used to buy back $ABAv1 tokens.</p>
             </div>
         </div>
 
-        <section class="price-display glow-box">
+        <section class="glow-box price-display">
             <p id="sol-price">Loading SOL price...</p>
             <p>Will SOL hit $150 this year?</p>
             <progress id="progress-bar" value="0" max="100"></progress>
             <p id="progress-text">0%</p>
         </section>
 
-        <section class="bet-overview glow-box">
+        <section class="glow-box bet-overview">
             <p>Current total payout amount if the bet wins <span id="profit-amount">Loading from Solana...</span></p>
         </section>
 
-        <div class="terminal glow-box" id="terminal">
+        <div class="glow-box terminal" id="terminal">
             Loading bot log...
         </div>
 
         <!-- Whitepaper Section -->
-        <div class="whitepaper-section glow-box">
+        <div class="glow-box whitepaper-section">
             <h2>Whitepaper</h2>
 
             <h3>Introduction</h3>
