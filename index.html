@@ -41,6 +41,7 @@
             transform: translateY(-5px);
         }
 
+        /* Feature Cards – mit Start-Animation */
         .card { 
             padding:50px 40px; 
             text-align:center; 
@@ -52,10 +53,11 @@
         .card:nth-child(2) { animation-delay: 0.8s; }
         .card:nth-child(3) { animation-delay: 1.1s; }
         @keyframes cardStartGlow {
-            0% { box-shadow: 0 0 0 #09C285; }
-            50% { box-shadow: 0 0 30px #09C285, 0 0 60px #09C28566; }
+            0% { box-shadow: 0 0 0 #09C285, 0 0 0 #09C28566, inset 0 0 0 #09C28544; }
+            50% { box-shadow: 0 0 30px #09C285, 0 0 60px #09C28566, inset 0 0 20px #09C28544; }
             100% { box-shadow: 0 0 15px #09C28522, inset 0 0 10px #09C28511; }
         }
+
         .card-icon { font-size:4.5rem; color:#09C285; margin-bottom:30px; text-shadow: 0 0 10px #09C285; filter: drop-shadow(0 0 8px #09C28530); }
         .card h3 { font-size:2rem; margin:20px 0; color:#09C285; }
         .card p { font-size:1.2rem; opacity:0.9; line-height:1.6; }
@@ -326,7 +328,7 @@
             }
         }
 
-        // Live Bot Log aus Supabase – neueste Nachricht oben
+        // Live Bot Log aus Supabase – neueste Nachricht oben + sauberer Timestamp
         const SUPABASE_URL = "https://bmoibbckojdahyxdgttx.supabase.co";
         const SUPABASE_ANON_KEY = "sb_publishable_DY2yiQ2HxKZYTP1bqejDEw_I0O4Ud0z";
 
