@@ -113,7 +113,7 @@
         .whitepaper-section {
             width:90%;
             max-width:1000px;
-            margin:80px auto;
+            margin:80px auto 80px;
             padding:40px;
             text-align:left;
         }
@@ -187,6 +187,18 @@
         html {
             scroll-behavior: smooth;
         }
+        /* Perfekter Offset für Whitepaper – Titel wird nicht vom Header überlappt */
+        .whitepaper-anchor {
+            padding-top: 140px;     /* Platz für den fixed Header */
+            margin-top: -140px;     /* Kompensiert den Padding, damit Layout gleich bleibt */
+            visibility: hidden;
+        }
+        @media (max-width:768px) {
+            .whitepaper-anchor {
+                padding-top: 120px;
+                margin-top: -120px;
+            }
+        }
     </style>
 </head>
 <body>
@@ -237,7 +249,11 @@
         <div class="glow-box terminal" id="terminal">
             Loading bot log...
         </div>
-        <div class="glow-box whitepaper-section" id="whitepaper">
+
+        <!-- Unsichtbarer Anker für perfekten Scroll ohne Überlappung -->
+        <div class="whitepaper-anchor" id="whitepaper"></div>
+
+        <div class="glow-box whitepaper-section">
             <h2>Whitepaper</h2>
             <h3>Introduction</h3>
             <p>AUTOBETAGENT is the first fully automated, on-chain bot on Solana that turns creator royalties into a high-conviction bet via Kalshi prediction markets.</p>
