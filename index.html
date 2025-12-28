@@ -86,7 +86,6 @@
             from { opacity:0; }
             to { opacity:1; }
         }
-        /* Voting Section mit Logged-Anzeige */
         .voting-section {
             width:90%;
             max-width:1000px;
@@ -147,6 +146,62 @@
             margin-top: -100px;
             visibility: hidden;
         }
+        .welcome-screen {
+            position:fixed;
+            top:0;
+            left:0;
+            width:100vw;
+            height:100vh;
+            background:#000;
+            display:flex;
+            flex-direction:column;
+            justify-content:center;
+            align-items:center;
+            z-index:100;
+            opacity:0;
+            pointer-events:none;
+            animation: welcomeFade 4s ease-out forwards;
+        }
+        .welcome-text {
+            font-size:6rem;
+            font-weight:700;
+            color:#09C285;
+            text-shadow: 0 0 30px #09C285, 0 0 60px #09C28566;
+            animation: welcomePulse 2s ease-in-out infinite alternate;
+            margin-bottom:50px;
+        }
+        .welcome-loader {
+            width:50%;
+            max-width:600px;
+            height:8px;
+            background:#09C28522;
+            border-radius:4px;
+            overflow:hidden;
+        }
+        .welcome-loader-bar {
+            width:0%;
+            height:100%;
+            background: linear-gradient(to right, #09C285, #4DE4B2);
+            animation: loadProgress 3s ease-out forwards;
+        }
+        @keyframes welcomeFade {
+            0% { opacity:0; }
+            10% { opacity:1; }
+            80% { opacity:1; }
+            100% { opacity:0; pointer-events:none; }
+        }
+        @keyframes welcomePulse {
+            from { text-shadow: 0 0 30px #09C285, 0 0 60px #09C28566; }
+            to { text-shadow: 0 0 50px #09C285, 0 0 100px #09C28588; }
+        }
+        @keyframes loadProgress {
+            from { width:0%; }
+            to { width:100%; }
+        }
+        @media (max-width:768px) {
+            .welcome-text { font-size:3.5rem; margin-bottom:30px; }
+            .welcome-loader { width:80%; }
+        }
     </style>
 </head>
 <body>
@@ -156,6 +211,7 @@
             <div class="welcome-loader-bar"></div>
         </div>
     </div>
+
     <canvas id="particles"></canvas>
     <header>
         <div class="logo">AUTOBETAGENT</div>
@@ -163,6 +219,7 @@
             <a href="#home">Home</a>
             <a href="#voting">Vote</a>
             <a href="#whitepaper">Whitepaper</a>
+            <a href="https://pump.fun/" target="_blank"><i class="fas fa-rocket"></i> pump.fun</a>
         </nav>
     </header>
     <section id="home" class="hero">
@@ -191,7 +248,6 @@
             <p>Current total payout amount if the bet wins <span id="profit-amount">Launching soon...</span></p>
         </section>
 
-        <!-- Community Voting mit Logged-Anzeige -->
         <div class="glow-box voting-section" id="voting">
             <h2>Community Vote: Which Bet Should We Place?</h2>
             <p class="logged-info">You are logged in – your vote counts!</p>
@@ -243,7 +299,6 @@
     </footer>
 
     <script>
-        // Particles, Bot Log – unverändert
         const canvas = document.getElementById('particles');
         const ctx = canvas.getContext('2d');
         canvas.width = window.innerWidth;
