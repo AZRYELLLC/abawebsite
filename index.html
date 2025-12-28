@@ -13,9 +13,22 @@
         .logo { font-size:1.8rem; font-weight:700; color:#09C285; }
         nav a { margin-left:40px; font-weight:500; opacity:0.8; transition:opacity 0.3s; display:inline-flex; align-items:center; gap:8px; }
         nav a:hover { opacity:1; color:#09C285; }
-        .hero { min-height:100vh; display:flex; flex-direction:column; justify-content:center; align-items:center; text-align:center; position:relative; padding:100px 20px 200px; box-sizing:border-box; z-index:2; overflow:visible; }
+        /* Hero jetzt oben ausgerichtet – alles sofort sichtbar */
+        .hero { 
+            display:flex; 
+            flex-direction:column; 
+            align-items:center; 
+            text-align:center; 
+            position:relative; 
+            padding-top:140px; /* Platz für fixed Header */
+            padding-bottom:200px;
+            box-sizing:border-box; 
+            z-index:2; 
+            overflow:visible; 
+            justify-content:flex-start; /* WICHTIG: oben anfangen statt center */
+        }
         .horizon-glow { position:absolute; bottom:0; left:0; width:100%; height:300px; background:radial-gradient(ellipse at center, #09C28544, transparent 70%); filter:blur(100px); opacity:0.6; z-index:1; }
-        .tagline { font-size:5rem; font-weight:700; margin:0 0 100px 0; line-height:1.2; z-index:2; color:white; }
+        .tagline { font-size:5rem; font-weight:700; margin:0 0 80px 0; line-height:1.2; color:white; }
         .features-hero {
             display:grid;
             grid-template-columns:repeat(auto-fit, minmax(320px, 1fr));
@@ -188,7 +201,6 @@
         <div class="horizon-glow"></div>
         <h1 class="tagline">Fueling Solana's Rise</h1>
 
-        <!-- Drei originale Feature-Kästchen -->
         <div class="features-hero">
             <div class="glow-box feature-card">
                 <i class="fas fa-shield-alt card-icon"></i>
@@ -207,7 +219,6 @@
             </div>
         </div>
 
-        <!-- Community Voting -->
         <div class="glow-box voting-section" id="voting">
             <h2>Community Vote: Which Bet Should We Place?</h2>
             <p class="logged-info">You are logged in – your vote counts!</p>
