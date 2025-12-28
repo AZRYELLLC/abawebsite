@@ -9,16 +9,24 @@
         @import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css');
         body { margin:0; padding:0; font-family:'Inter', sans-serif; background:#000; color:#fff; overflow-x:hidden; position:relative; }
         a { color:#fff; text-decoration:none; }
-        header { position:fixed; top:0; left:0; width:100%; padding:30px 50px; display:flex; justify-content:space-between; align-items:center; z-index:10; box-sizing:border-box; backdrop-filter:blur(10px); background:rgba(0,0,0,0.8); }
+        header { position:fixed; top:0; width:100%; padding:30px 50px; display:flex; justify-content:space-between; align-items:center; z-index:10; box-sizing:border-box; backdrop-filter:blur(10px); }
         .logo { font-size:1.8rem; font-weight:700; color:#09C285; }
         nav a { margin-left:40px; font-weight:500; opacity:0.8; transition:opacity 0.3s; display:inline-flex; align-items:center; gap:8px; }
         nav a:hover { opacity:1; color:#09C285; }
-        /* Hauptinhalt – direkt unter dem Header */
-        .main-content {
-            padding-top:140px; /* Platz für fixed Header */
-            padding-bottom:200px;
+        .hero {
+            display:flex;
+            flex-direction:column;
+            align-items:center;
             text-align:center;
+            position:relative;
+            padding-top:140px;
+            padding-bottom:200px;
+            box-sizing:border-box;
+            z-index:2;
+            overflow:visible;
+            justify-content:flex-start;
         }
+        .horizon-glow { position:absolute; bottom:0; left:0; width:100%; height:300px; background:radial-gradient(ellipse at center, #09C28544, transparent 70%); filter:blur(100px); opacity:0.6; z-index:1; }
         .tagline { font-size:5rem; font-weight:700; margin:0 0 80px 0; line-height:1.2; color:white; }
         .features-hero {
             display:grid;
@@ -27,7 +35,8 @@
             max-width:1400px;
             width:100%;
             padding:0 50px;
-            margin:0 auto 200px auto;
+            z-index:2;
+            margin-bottom:200px;
         }
         .glow-box {
             background:rgba(0,30,30,0.6);
@@ -44,6 +53,8 @@
         .feature-card {
             padding:50px 40px;
             text-align:center;
+            position:relative;
+            z-index:2;
         }
         .card-icon { font-size:4.5rem; color:#09C285; margin-bottom:30px; text-shadow: 0 0 10px #09C285; filter: drop-shadow(0 0 8px #09C28530); }
         .feature-card h3 { font-size:2rem; margin:20px 0; color:#09C285; }
@@ -100,8 +111,14 @@
         .whitepaper-section h2 { font-size:2.5rem; color:#09C285; margin-bottom:30px; text-align:center; }
         .whitepaper-section h3 { font-size:1.8rem; color:#09C285; margin:30px 0 15px 0; }
         .whitepaper-section p { font-size:1.2rem; line-height:1.8; opacity:0.9; margin-bottom:20px; }
-        footer { padding:80px 50px; text-align:center; opacity:0.6; font-size:1.1rem; }
-        canvas#particles { position:fixed; top:0; left:0; width:100%; height:100%; z-index:1; pointer-events:none; }
+        html {
+            scroll-behavior: smooth;
+        }
+        .whitepaper-anchor {
+            padding-top: 100px;
+            margin-top: -100px;
+            visibility: hidden;
+        }
         .welcome-screen {
             position:fixed;
             top:0;
@@ -158,7 +175,16 @@
             .welcome-text { font-size:3.5rem; margin-bottom:30px; }
             .welcome-loader { width:80%; }
             .tagline { font-size:3.5rem; }
-            .features-hero { gap:30px; padding:0 20px; }
+        }
+        /* WICHTIG: Particles hinter den Inhalt legen */
+        canvas#particles { 
+            position:fixed; 
+            top:0; 
+            left:0; 
+            width:100%; 
+            height:100%; 
+            z-index:0; /* Niedriger als Inhalt (z-index:2) und Header (z-index:10) */
+            pointer-events:none; 
         }
     </style>
 </head>
@@ -180,9 +206,8 @@
             <a href="https://pump.fun/" target="_blank"><i class="fas fa-rocket"></i> pump.fun</a>
         </nav>
     </header>
-
-    <!-- Hauptinhalt – direkt unter dem Header -->
-    <div class="main-content">
+    <section id="home" class="hero">
+        <div class="horizon-glow"></div>
         <h1 class="tagline">Fueling Solana's Rise</h1>
 
         <div class="features-hero">
@@ -234,7 +259,9 @@
             </div>
         </div>
 
-        <div class="glow-box whitepaper-section" id="whitepaper">
+        <div class="whitepaper-anchor" id="whitepaper"></div>
+
+        <div class="glow-box whitepaper-section">
             <h2>Whitepaper</h2>
             <h3>Introduction</h3>
             <p>AUTOBETAGENT is the first fully automated, on-chain bot on Solana that turns creator fees into a community-voted Kalshi bet.</p>
@@ -242,8 +269,7 @@
             <p>On win → 100% of profits used to buy back and burn $ABAxPUMP tokens.</p>
             <p>The future is bright – and the community decides where we bet.</p>
         </div>
-    </div>
-
+    </section>
     <footer>
         © 2025 AUTOBETAGENT • Not financial advice • All transactions on-chain and publicly verifiable
     </footer>
