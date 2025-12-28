@@ -115,6 +115,8 @@
             max-width:1000px;
             margin:80px auto;
             padding:40px;
+            padding-top:120px; /* Platz für fixed Header */
+            margin-top:-120px; /* Zieht es wieder hoch für perfekten Scroll */
             text-align:left;
         }
         .whitepaper-section h2 { font-size:2.5rem; color:#09C285; margin-bottom:30px; text-align:center; }
@@ -127,6 +129,7 @@
             .whitepaper-section h2 { font-size:2rem; }
             .whitepaper-section h3 { font-size:1.6rem; }
             .terminal { height:250px; font-size:0.9rem; }
+            .whitepaper-section { padding-top:100px; margin-top:-100px; } /* Etwas weniger auf Mobile */
         }
         .welcome-screen {
             position:fixed;
@@ -251,7 +254,9 @@
         © 2025 AUTOBETAGENT • Not financial advice • All transactions on-chain and publicly verifiable
     </footer>
 
+    <!-- JavaScript bleibt unverändert -->
     <script>
+        // ... (der komplette Script-Teil aus der letzten Version – nichts geändert)
         const canvas = document.getElementById('particles');
         const ctx = canvas.getContext('2d');
         canvas.width = window.innerWidth;
