@@ -15,7 +15,7 @@
         nav a:hover { opacity:1; color:#09C285; }
         .hero { min-height:100vh; display:flex; flex-direction:column; justify-content:center; align-items:center; text-align:center; position:relative; padding:100px 20px 200px; box-sizing:border-box; z-index:2; overflow:visible; }
         .horizon-glow { position:absolute; bottom:0; left:0; width:100%; height:300px; background:radial-gradient(ellipse at center, #09C28544, transparent 70%); filter:blur(100px); opacity:0.6; z-index:1; }
-        .tagline { font-size:5rem; font-weight:700; margin:0 0 100px 0; line-height:1.2; z-index:2; color:white; }
+        .tagline { font-size:5rem; font-weight:700; margin:0 0 40px 0; line-height:1.2; z-index:2; color:white; }
         .features-hero {
             display:grid;
             grid-template-columns:repeat(auto-fit, minmax(320px, 1fr));
@@ -53,7 +53,7 @@
             from { opacity:0; transform:translateY(20px); }
             to { opacity:1; transform:translateY(0); }
         }
-        .price-display, .bet-overview, .terminal, .whitepaper-section {
+        .price-display, .bet-overview, .terminal, .voting-section, .whitepaper-section {
             animation: fadeInUp 0.8s ease-out;
         }
         .price-display p { font-size:1.2rem; margin:10px 0; }
@@ -91,113 +91,59 @@
             from { opacity:0; }
             to { opacity:1; }
         }
-        .terminal::-webkit-scrollbar {
-            width: 12px;
+        .voting-section {
+            width:90%;
+            max-width:1000px;
+            margin:80px auto;
+            padding:40px;
+            text-align:center;
         }
-        .terminal::-webkit-scrollbar-track {
-            background: #000;
-            border-radius: 10px;
+        .voting-section h2 { font-size:2.5rem; color:#09C285; margin-bottom:40px; }
+        .voting-options {
+            display:grid;
+            grid-template-columns:repeat(auto-fit, minmax(300px, 1fr));
+            gap:30px;
         }
-        .terminal::-webkit-scrollbar-thumb {
-            background: #09C28533;
-            border-radius: 10px;
-            border: 2px solid #000;
+        .voting-option {
+            padding:30px;
+            background:rgba(0,30,30,0.6);
+            border:2px solid #09C28533;
+            border-radius:20px;
+            transition: all 0.3s ease;
         }
-        .terminal::-webkit-scrollbar-thumb:hover {
-            background: #09C28566;
+        .voting-option:hover {
+            border-color:#09C285;
+            box-shadow:0 0 30px #09C28544;
         }
-        .terminal {
-            scrollbar-color: #09C28533 #000;
-            scrollbar-width: thin;
+        .voting-option label {
+            font-size:1.4rem;
+            cursor:pointer;
+            display:flex;
+            align-items:center;
+            justify-content:center;
+            gap:15px;
+        }
+        .voting-option input[type="radio"] {
+            transform:scale(1.5);
+            accent-color:#09C285;
         }
         .whitepaper-section {
             width:90%;
             max-width:1000px;
-            margin:80px auto 80px;
+            margin:80px auto;
             padding:40px;
             text-align:left;
         }
         .whitepaper-section h2 { font-size:2.5rem; color:#09C285; margin-bottom:30px; text-align:center; }
         .whitepaper-section h3 { font-size:1.8rem; color:#09C285; margin:30px 0 15px 0; }
         .whitepaper-section p { font-size:1.2rem; line-height:1.8; opacity:0.9; margin-bottom:20px; }
-        .whitepaper-section ul { font-size:1.2rem; line-height:1.8; opacity:0.9; margin-left:20px; margin-bottom:20px; }
-        .whitepaper-section li { margin-bottom:10px; }
-        @media (max-width:768px) {
-            .price-display, .bet-overview, .terminal, .whitepaper-section { width:85%; padding:20px; }
-            .whitepaper-section h2 { font-size:2rem; }
-            .whitepaper-section h3 { font-size:1.6rem; }
-            .terminal { height:250px; font-size:0.9rem; }
-        }
-        .welcome-screen {
-            position:fixed;
-            top:0;
-            left:0;
-            width:100vw;
-            height:100vh;
-            background:#000;
-            display:flex;
-            flex-direction:column;
-            justify-content:center;
-            align-items:center;
-            z-index:100;
-            opacity:0;
-            pointer-events:none;
-            animation: welcomeFade 4s ease-out forwards;
-        }
-        .welcome-text {
-            font-size:6rem;
-            font-weight:700;
-            color:#09C285;
-            text-shadow: 0 0 30px #09C285, 0 0 60px #09C28566;
-            animation: welcomePulse 2s ease-in-out infinite alternate;
-            margin-bottom:50px;
-        }
-        .welcome-loader {
-            width:50%;
-            max-width:600px;
-            height:8px;
-            background:#09C28522;
-            border-radius:4px;
-            overflow:hidden;
-        }
-        .welcome-loader-bar {
-            width:0%;
-            height:100%;
-            background: linear-gradient(to right, #09C285, #4DE4B2);
-            animation: loadProgress 3s ease-out forwards;
-        }
-        @keyframes welcomeFade {
-            0% { opacity:0; }
-            10% { opacity:1; }
-            80% { opacity:1; }
-            100% { opacity:0; pointer-events:none; }
-        }
-        @keyframes welcomePulse {
-            from { text-shadow: 0 0 30px #09C285, 0 0 60px #09C28566; }
-            to { text-shadow: 0 0 50px #09C285, 0 0 100px #09C28588; }
-        }
-        @keyframes loadProgress {
-            from { width:0%; }
-            to { width:100%; }
-        }
-        @media (max-width:768px) {
-            .welcome-text { font-size:3.5rem; margin-bottom:30px; }
-            .welcome-loader { width:80%; }
-        }
         html {
             scroll-behavior: smooth;
         }
-        /* Minimaler Abstand – Glow der Box endet direkt unter dem Header */
         .whitepaper-anchor {
-            padding-top: 100px;     /* Kleiner Offset – Glow berührt fast den Header */
+            padding-top: 100px;
             margin-top: -100px;
             visibility: hidden;
-        }
-        @media (max-width:768px) {
-            .whitepaper-anchor {
-                padding-top: 90px;
-                margin-top: -90px;
-            }
         }
     </style>
 </head>
@@ -214,12 +160,13 @@
         <nav>
             <a href="#home">Home</a>
             <a href="#whitepaper">Whitepaper</a>
-            <a href="https://x.com/autobetagent" target="_blank"><i class="fab fa-x-twitter"></i></a>
+            <a href="https://pump.fun/" target="_blank"><i class="fas fa-rocket"></i> Launch on Pump.fun</a>
         </nav>
     </header>
     <section id="home" class="hero">
         <div class="horizon-glow"></div>
         <h1 class="tagline">Fueling Solana's Rise</h1>
+
         <div class="features-hero">
             <div class="glow-box feature-card">
                 <i class="fas fa-shield-alt card-icon"></i>
@@ -237,30 +184,61 @@
                 <p>If the Kalshi bet wins, all profits will be used to buy back $ABAXBAGS tokens.</p>
             </div>
         </div>
+
         <section class="glow-box price-display">
             <p id="sol-price">Loading SOL price...</p>
             <p>Will SOL hit $150 this year?</p>
             <progress id="progress-bar" value="0" max="100"></progress>
             <p id="progress-text">0%</p>
         </section>
+
         <section class="glow-box bet-overview">
             <p>Current total payout amount if the bet wins <span id="profit-amount">Launching soon...</span></p>
         </section>
+
+        <div class="glow-box voting-section">
+            <h2>Community Vote: Which Bet Should We Place?</h2>
+            <div class="voting-options">
+                <div class="voting-option">
+                    <label>
+                        <input type="radio" name="vote" value="sol150">
+                        SOL hits $150 by end of 2025
+                    </label>
+                </div>
+                <div class="voting-option">
+                    <label>
+                        <input type="radio" name="vote" value="sol200">
+                        SOL hits $200 by end of 2025
+                    </label>
+                </div>
+                <div class="voting-option">
+                    <label>
+                        <input type="radio" name="vote" value="btc100k">
+                        BTC hits $100,000 by end of 2025
+                    </label>
+                </div>
+                <div class="voting-option">
+                    <label>
+                        <input type="radio" name="vote" value="eth5k">
+                        ETH hits $5,000 by end of 2025
+                    </label>
+                </div>
+            </div>
+        </div>
+
         <div class="glow-box terminal" id="terminal">
             Loading bot log...
         </div>
 
-        <!-- Minimaler Anker – Glow endet direkt unter Header -->
         <div class="whitepaper-anchor" id="whitepaper"></div>
 
         <div class="glow-box whitepaper-section">
             <h2>Whitepaper</h2>
             <h3>Introduction</h3>
-            <p>AUTOBETAGENT is the first fully automated, on-chain bot on Solana that turns creator royalties into a high-conviction bet via Kalshi prediction markets.</p>
-            <p>All trading fees from <strong>$ABAXBAGS</strong> will be automatically claimed, swapped to USDC, and used to bet on "Will SOL hit $150 by end of 2025?".</p>
+            <p>AUTOBETAGENT is the first fully automated, on-chain bot on Solana that turns creator fees into a community-voted Kalshi bet.</p>
+            <p>All revenue from $ABAXBAGS will be automatically claimed, swapped to USDC, and used to place the winning community-voted prediction on Kalshi.</p>
             <p>On win → 100% of profits used to buy back and burn $ABAXBAGS tokens.</p>
-            <p>The odds may look long today, but 2025 isn't over yet. Solana season is just getting started.</p>
-            <blockquote class="twitter-tweet" data-theme="dark"><p lang="en" dir="ltr">I believe in santa claus <a href="https://t.co/5010TKu7io">https://t.co/5010TKu7io</a> <a href="https://t.co/qwN46BgdkU">pic.com/qwN46BgdkU</a></p>&mdash; mert | helius (@mert) <a href="https://twitter.com/mert/status/2003867156308472016?ref_src=twsrc%5Etfw">December 24, 2025</a></blockquote> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+            <p>The future is bright – and the community decides where we bet.</p>
         </div>
     </section>
     <footer>
@@ -268,6 +246,7 @@
     </footer>
 
     <script>
+        // Particles, SOL Price, Bot Log – unverändert
         const canvas = document.getElementById('particles');
         const ctx = canvas.getContext('2d');
         canvas.width = window.innerWidth;
@@ -346,10 +325,9 @@
                 terminal.innerHTML = '';
                 if (logs.length === 0) {
                     const lines = [
-                        "[SYSTEM] Preparing launch of $ABAXBAGS",
-                        "[SYSTEM] Royalties routing active",
+                        "[SYSTEM] Preparing launch on pump.fun",
                         "[SYSTEM] Bot ready – waiting for first fees",
-                        "[INFO] SOL @ $150 Kalshi bet will activate automatically"
+                        "[INFO] Community vote will decide the Kalshi bet"
                     ];
                     lines.forEach(msg => {
                         const line = document.createElement('div');
@@ -368,7 +346,7 @@
                 }
                 terminal.scrollTop = 0;
             } catch (error) {
-                document.getElementById('terminal').innerHTML = '<div class="terminal-line">Bot preparing for $ABAXBAGS launch...</div>';
+                document.getElementById('terminal').innerHTML = '<div class="terminal-line">Bot preparing for launch...</div>';
             }
         }
 
