@@ -13,7 +13,7 @@
         .logo { font-size:1.8rem; font-weight:700; color:#09C285; }
         nav a { margin-left:40px; font-weight:500; opacity:0.8; transition:opacity 0.3s; display:inline-flex; align-items:center; gap:8px; }
         nav a:hover { opacity:1; color:#09C285; }
-        /* HERO – jetzt oben ausgerichtet, kein Center mehr */
+        /* Hero – jetzt komplett oben ausgerichtet, kein Center, kein min-height */
         .hero {
             display:flex;
             flex-direction:column;
@@ -25,7 +25,7 @@
             box-sizing:border-box;
             z-index:2;
             overflow:visible;
-            justify-content:flex-start; /* Alles oben anfangen */
+            justify-content:flex-start;
         }
         .horizon-glow { position:absolute; bottom:0; left:0; width:100%; height:300px; background:radial-gradient(ellipse at center, #09C28544, transparent 70%); filter:blur(100px); opacity:0.6; z-index:1; }
         .tagline { font-size:5rem; font-weight:700; margin:0 0 80px 0; line-height:1.2; color:white; }
