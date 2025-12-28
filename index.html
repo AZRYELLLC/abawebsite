@@ -13,14 +13,15 @@
         .logo { font-size:1.8rem; font-weight:700; color:#09C285; }
         nav a { margin-left:40px; font-weight:500; opacity:0.8; transition:opacity 0.3s; display:inline-flex; align-items:center; gap:8px; }
         nav a:hover { opacity:1; color:#09C285; }
-        /* Hero-Bereich jetzt oben ausgerichtet – alles sofort sichtbar */
+        /* HERO – jetzt oben ausgerichtet, kein Center mehr */
         .hero {
             display:flex;
             flex-direction:column;
             align-items:center;
             text-align:center;
             position:relative;
-            padding:140px 20px 200px; /* Platz für Header oben */
+            padding-top:140px; /* Platz für fixed Header */
+            padding-bottom:200px;
             box-sizing:border-box;
             z-index:2;
             overflow:visible;
