@@ -187,16 +187,16 @@
         html {
             scroll-behavior: smooth;
         }
-        /* Etwas mehr Scroll nach unten – Titel perfekt sichtbar + mehr Text darunter */
+        /* Minimaler Abstand – Glow der Box endet direkt unter dem Header */
         .whitepaper-anchor {
-            padding-top: 160px;     /* Mehr Platz als vorher */
-            margin-top: -160px;     /* Kompensiert den Padding */
+            padding-top: 100px;     /* Kleiner Offset – Glow berührt fast den Header */
+            margin-top: -100px;
             visibility: hidden;
         }
         @media (max-width:768px) {
             .whitepaper-anchor {
-                padding-top: 140px;
-                margin-top: -140px;
+                padding-top: 90px;
+                margin-top: -90px;
             }
         }
     </style>
@@ -250,7 +250,7 @@
             Loading bot log...
         </div>
 
-        <!-- Unsichtbarer Anker mit mehr Offset für extra Scroll nach unten -->
+        <!-- Minimaler Anker – Glow endet direkt unter Header -->
         <div class="whitepaper-anchor" id="whitepaper"></div>
 
         <div class="glow-box whitepaper-section">
@@ -268,7 +268,6 @@
     </footer>
 
     <script>
-        // JavaScript bleibt unverändert
         const canvas = document.getElementById('particles');
         const ctx = canvas.getContext('2d');
         canvas.width = window.innerWidth;
