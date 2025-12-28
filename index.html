@@ -16,23 +16,21 @@
         .hero { min-height:100vh; display:flex; flex-direction:column; justify-content:center; align-items:center; text-align:center; position:relative; padding:100px 20px 200px; box-sizing:border-box; z-index:2; overflow:visible; }
         .horizon-glow { position:absolute; bottom:0; left:0; width:100%; height:300px; background:radial-gradient(ellipse at center, #09C28544, transparent 70%); filter:blur(100px); opacity:0.6; z-index:1; }
         .tagline { font-size:5rem; font-weight:700; margin:0 0 100px 0; line-height:1.2; z-index:2; color:white; }
-        .features-hero { 
-            display:grid; 
-            grid-template-columns:repeat(auto-fit, minmax(320px, 1fr)); 
-            gap:50px; 
-            max-width:1400px; 
-            width:100%; 
-            padding:0 50px; 
-            z-index:2; 
-            margin-bottom:150px; 
+        .features-hero {
+            display:grid;
+            grid-template-columns:repeat(auto-fit, minmax(320px, 1fr));
+            gap:50px;
+            max-width:1400px;
+            width:100%;
+            padding:0 50px;
+            z-index:2;
+            margin-bottom:150px;
         }
-
-        /* Einheitlicher Glow für ALLE Boxen */
         .glow-box {
-            background:rgba(0,30,30,0.6); 
-            border:1px solid #09C28533; 
-            border-radius:20px; 
-            backdrop-filter:blur(10px); 
+            background:rgba(0,30,30,0.6);
+            border:1px solid #09C28533;
+            border-radius:20px;
+            backdrop-filter:blur(10px);
             box-shadow: 0 0 15px #09C28522, inset 0 0 10px #09C28511;
             transition: box-shadow 0.5s ease, transform 0.3s ease;
         }
@@ -40,22 +38,17 @@
             box-shadow: 0 0 40px #09C285, 0 0 80px #09C28588, inset 0 0 30px #09C28566;
             transform: translateY(-8px);
         }
-
-        /* Feature Cards – Padding */
         .feature-card {
-            padding:50px 40px; 
-            text-align:center; 
-            position:relative; 
-            z-index:2; 
+            padding:50px 40px;
+            text-align:center;
+            position:relative;
+            z-index:2;
         }
-
         .card-icon { font-size:4.5rem; color:#09C285; margin-bottom:30px; text-shadow: 0 0 10px #09C285; filter: drop-shadow(0 0 8px #09C28530); }
         .feature-card h3 { font-size:2rem; margin:20px 0; color:#09C285; }
         .feature-card p { font-size:1.2rem; opacity:0.9; line-height:1.6; }
-
         .price-display { width:90%; max-width:600px; margin:0 auto 20px auto; padding:20px; text-align:center; }
         .bet-overview { width:90%; max-width:600px; margin:20px auto 20px auto; padding:20px; text-align:center; }
-
         @keyframes fadeInUp {
             from { opacity:0; transform:translateY(20px); }
             to { opacity:1; transform:translateY(0); }
@@ -63,74 +56,65 @@
         .price-display, .bet-overview, .terminal, .whitepaper-section {
             animation: fadeInUp 0.8s ease-out;
         }
-
         .price-display p { font-size:1.2rem; margin:10px 0; }
         progress { width: 100%; height: 25px; -webkit-appearance: none; appearance: none; border: none; border-radius: 12px; background: #09C28522; overflow: hidden; }
         progress::-webkit-progress-value { background: linear-gradient(to right, #09C285, #4DE4B2); border-radius: 12px; transition: width 0.5s ease; }
         progress::-moz-progress-bar { background: linear-gradient(to right, #09C285, #4DE4B2); border-radius: 12px; }
         footer { padding:80px 50px; text-align:center; opacity:0.6; font-size:1.1rem; position:relative; z-index:2; }
         canvas#particles { position:fixed; top:0; left:0; width:100%; height:100%; z-index:1; pointer-events:none; }
-
-        /* Terminal – neueste Nachricht oben mit sichtbarem Dark Mode Scrollbar */
         .terminal {
-            width:90%; 
-            max-width:800px; 
-            margin:50px auto; 
-            padding:20px; 
-            height:300px; 
-            overflow-y:auto; 
+            width:90%;
+            max-width:800px;
+            margin:50px auto;
+            padding:20px;
+            height:300px;
+            overflow-y:auto;
             text-align:left;
             display: flex;
             flex-direction: column;
-            color-scheme: dark; /* Erzwingt Dark Mode für Scrollbar */
+            color-scheme: dark;
         }
         .terminal::before {
             content: "> AUTOBETAGENT BOT LOG";
-            display:block; 
-            font-weight:bold; 
-            margin-bottom:10px; 
-            color:#09C285; 
+            display:block;
+            font-weight:bold;
+            margin-bottom:10px;
+            color:#09C285;
             text-shadow: 0 0 10px #09C285;
             order: -1;
         }
         .terminal-line {
-            margin:5px 0; 
+            margin:5px 0;
             animation: fadeIn 0.5s forwards;
         }
         @keyframes fadeIn {
             from { opacity:0; }
             to { opacity:1; }
         }
-
-        /* Benutzerdefinierte Scrollbar-Styling für WebKit-Browser (Chrome, Safari) */
         .terminal::-webkit-scrollbar {
-            width: 12px; /* Breite des Scrollbalkens */
+            width: 12px;
         }
         .terminal::-webkit-scrollbar-track {
-            background: #000; /* Hintergrund des Tracks */
+            background: #000;
             border-radius: 10px;
         }
         .terminal::-webkit-scrollbar-thumb {
-            background: #09C28533; /* Farbe des Daumens im Dark Mode */
+            background: #09C28533;
             border-radius: 10px;
-            border: 2px solid #000; /* Rand, um Kontrast zu erhöhen */
+            border: 2px solid #000;
         }
         .terminal::-webkit-scrollbar-thumb:hover {
-            background: #09C28566; /* Hover-Effekt */
+            background: #09C28566;
         }
-
-        /* Fallback für Firefox */
         .terminal {
-            scrollbar-color: #09C28533 #000; /* Daumen-Farbe, Track-Farbe */
-            scrollbar-width: thin; /* Dünner Scrollbalken */
+            scrollbar-color: #09C28533 #000;
+            scrollbar-width: thin;
         }
-
-        /* Whitepaper Section */
         .whitepaper-section {
-            width:90%; 
-            max-width:1000px; 
-            margin:80px auto; 
-            padding:40px; 
+            width:90%;
+            max-width:1000px;
+            margin:80px auto;
+            padding:40px;
             text-align:left;
         }
         .whitepaper-section h2 { font-size:2.5rem; color:#09C285; margin-bottom:30px; text-align:center; }
@@ -144,8 +128,6 @@
             .whitepaper-section h3 { font-size:1.6rem; }
             .terminal { height:250px; font-size:0.9rem; }
         }
-
-        /* Start Animation – Welcome Screen mit Ladebalken */
         .welcome-screen {
             position:fixed;
             top:0;
@@ -205,29 +187,24 @@
     </style>
 </head>
 <body>
-    <!-- Welcome Start Animation mit Ladebalken -->
     <div class="welcome-screen">
         <div class="welcome-text">WELCOME TO AUTOBETAGENT!</div>
         <div class="welcome-loader">
             <div class="welcome-loader-bar"></div>
         </div>
     </div>
-
     <canvas id="particles"></canvas>
-
     <header>
         <div class="logo">AUTOBETAGENT</div>
         <nav>
             <a href="#home">Home</a>
             <a href="https://x.com/autobetagent" target="_blank"><i class="fab fa-x-twitter"></i></a>
-            <a href="https://pump.fun/37smXTBasLhNQiAFHc5FHUti3JKvCvcXKRhW7YqEbonk" target="_blank"><i class="fas fa-rocket"></i> Pump.fun</a>
+            <a href="https://bags.fm/launch" target="_blank"><i class="fas fa-bag-shopping"></i> Launch on Bags</a>
         </nav>
     </header>
-
     <section id="home" class="hero">
         <div class="horizon-glow"></div>
         <h1 class="tagline">Fueling Solana's Rise</h1>
-
         <div class="features-hero">
             <div class="glow-box feature-card">
                 <i class="fas fa-shield-alt card-icon"></i>
@@ -245,49 +222,40 @@
                 <p>If the Kalshi bet wins, all profits will be used to buy back $ABAv1 tokens.</p>
             </div>
         </div>
-
         <section class="glow-box price-display">
             <p id="sol-price">Loading SOL price...</p>
             <p>Will SOL hit $150 this year?</p>
             <progress id="progress-bar" value="0" max="100"></progress>
             <p id="progress-text">0%</p>
         </section>
-
         <section class="glow-box bet-overview">
-            <p>Current total payout amount if the bet wins <span id="profit-amount">Loading from Solana...</span></p>
+            <p>Current total payout amount if the bet wins <span id="profit-amount">Waiting for launch on Bags...</span></p>
         </section>
-
         <div class="glow-box terminal" id="terminal">
             Loading bot log...
         </div>
-
-        <!-- Whitepaper Section -->
         <div class="glow-box whitepaper-section">
             <h2>Whitepaper</h2>
-
             <h3>Introduction</h3>
-            <p>AUTOBETAGENT is the first fully automated, on-chain bot on Solana that turns creator fees into a bet via Kalshi prediction markets.</p>
-            <p>All revenue from $ABAv1 token trades is automatically claimed, swapped to USDC, and used to bet on "Will SOL hit $150 this year?".</p>
-            <p>On win, all profits are used to buy back $ABAv1 tokens.</p>
-            <p>It might sound unlikely to many that this bet will pay off, but the year is not over yet, and the best is still ahead of us.</p>
+            <p>AUTOBETAGENT is the first fully automated, on-chain bot on Solana that turns perpetual creator royalties into a high-conviction bet via Kalshi prediction markets.</p>
+            <p>Launching on <strong>Bags.fm</strong> – all trading fees (1% forever) from $ABAv1 will be automatically claimed, swapped to USDC, and used to bet on "Will SOL hit $150 by end of 2025?".</p>
+            <p>On win → 100% of profits used to buy back and burn $ABAv1 tokens.</p>
+            <p>The odds may look long today, but 2025 isn't over yet. Solana season is just getting started.</p>
             <blockquote class="twitter-tweet" data-theme="dark"><p lang="en" dir="ltr">I believe in santa claus <a href="https://t.co/5010TKu7io">https://t.co/5010TKu7io</a> <a href="https://t.co/qwN46BgdkU">pic.twitter.com/qwN46BgdkU</a></p>&mdash; mert | helius (@mert) <a href="https://twitter.com/mert/status/2003867156308472016?ref_src=twsrc%5Etfw">December 24, 2025</a></blockquote> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
         </div>
     </section>
-
     <footer>
         © 2025 AUTOBETAGENT • Not financial advice • All transactions on-chain and publicly verifiable
     </footer>
 
     <script>
-        // Particle Effect
+        // Particle Effect (unverändert)
         const canvas = document.getElementById('particles');
         const ctx = canvas.getContext('2d');
         canvas.width = window.innerWidth;
         canvas.height = window.innerHeight;
-
         const particlesArray = [];
         const numberOfParticles = 150;
-
         class Particle {
             constructor() {
                 this.x = Math.random() * canvas.width;
@@ -313,13 +281,11 @@
                 ctx.shadowBlur = 0;
             }
         }
-
         function init() {
             for (let i = 0; i < numberOfParticles; i++) {
                 particlesArray.push(new Particle());
             }
         }
-
         function animate() {
             ctx.clearRect(0, 0, canvas.width, canvas.height);
             particlesArray.forEach(p => { p.update(); p.draw(); });
@@ -329,7 +295,7 @@
         animate();
         window.addEventListener('resize', () => { canvas.width = window.innerWidth; canvas.height = window.innerHeight; particlesArray.length = 0; init(); });
 
-        // Current Solana Price – live von CoinGecko
+        // SOL Price (unverändert)
         async function fetchSolPrice() {
             try {
                 const response = await fetch('https://api.coingecko.com/api/v3/simple/price?ids=solana&vs_currencies=usd');
@@ -346,48 +312,12 @@
             }
         }
 
-        // Current total payout amount if the bet wins – live über Helius
-        async function fetchPayoutData() {
-            try {
-                const rpcUrl = 'https://mainnet.helius-rpc.com/?api-key=ca63096a-7d19-4f56-8c5c-1443d9e48301';
-                const tokenAccount = 'BVGrzCCDZ9nzsFT7jZXxQVwFEzeH3UtCwzQ7oNPMxpDi';
+        // Payout Amount – vorerst neutral (wird nach Launch aktualisiert)
+        document.getElementById('profit-amount').textContent = 'Launching soon on Bags.fm...';
 
-                const response = await fetch(rpcUrl, {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({
-                        jsonrpc: '2.0',
-                        id: 1,
-                        method: 'getAccountInfo',
-                        params: [tokenAccount, { encoding: 'jsonParsed' }]
-                    })
-                });
-                const data = await response.json();
-
-                let balance = 0;
-                if (data.result && data.result.value) {
-                    const parsed = data.result.value.data.parsed;
-                    if (parsed && parsed.info && parsed.info.tokenAmount) {
-                        balance = parseFloat(parsed.info.tokenAmount.uiAmountString || parsed.info.tokenAmount.uiAmount || 0);
-                    }
-                }
-
-                if (balance > 0) {
-                    const amountStr = balance.toLocaleString('en-US', { minimumFractionDigits: 0, maximumFractionDigits: 3 });
-                    document.getElementById('profit-amount').textContent = `$${amountStr}`;
-                } else {
-                    document.getElementById('profit-amount').textContent = 'Waiting for claims & bet...';
-                }
-            } catch (error) {
-                console.error('Error:', error);
-                document.getElementById('profit-amount').textContent = 'Error loading data';
-            }
-        }
-
-        // Live Bot Log aus Supabase – neueste Nachricht oben + sauberer Timestamp
+        // Bot Log – zeigt Infos zum bevorstehenden Launch
         const SUPABASE_URL = "https://bmoibbckojdahyxdgttx.supabase.co";
         const SUPABASE_ANON_KEY = "sb_publishable_DY2yiQ2HxKZYTP1bqejDEw_I0O4Ud0z";
-
         async function loadBotLog() {
             try {
                 const response = await fetch(`${SUPABASE_URL}/rest/v1/bot_logs?order=created_at.desc`, {
@@ -399,27 +329,38 @@
                 const logs = await response.json();
                 const terminal = document.getElementById('terminal');
                 terminal.innerHTML = '';
-                logs.forEach(log => {
-                    const time = new Date(log.created_at).toLocaleTimeString('en-GB', { hour: '2-digit', minute: '2-digit', second: '2-digit' });
-                    const line = document.createElement('div');
-                    line.className = 'terminal-line';
-                    line.textContent = `[${time}] ${log.message}`;
-                    terminal.appendChild(line);
-                });
+                if (logs.length === 0) {
+                    const lines = [
+                        "[SYSTEM] Preparing launch on Bags.fm",
+                        "[SYSTEM] Perpetual royalties enabled",
+                        "[SYSTEM] Bot ready – waiting for first fees",
+                        "[INFO] SOL @ $150 Kalshi bet will activate automatically"
+                    ];
+                    lines.forEach(msg => {
+                        const line = document.createElement('div');
+                        line.className = 'terminal-line';
+                        line.textContent = msg;
+                        terminal.appendChild(line);
+                    });
+                } else {
+                    logs.forEach(log => {
+                        const time = new Date(log.created_at).toLocaleTimeString('en-GB', { hour: '2-digit', minute: '2-digit', second: '2-digit' });
+                        const line = document.createElement('div');
+                        line.className = 'terminal-line';
+                        line.textContent = `[${time}] ${log.message}`;
+                        terminal.appendChild(line);
+                    });
+                }
                 terminal.scrollTop = 0;
             } catch (error) {
-                console.error('Log error:', error);
-                document.getElementById('terminal').innerHTML = '<div class="terminal-line">Error loading bot log</div>';
+                document.getElementById('terminal').innerHTML = '<div class="terminal-line">Bot preparing for Bags launch...</div>';
             }
         }
 
         loadBotLog();
         setInterval(loadBotLog, 10000);
-
         fetchSolPrice();
-        fetchPayoutData();
         setInterval(fetchSolPrice, 60000);
-        setInterval(fetchPayoutData, 120000);
     </script>
 </body>
 </html>
