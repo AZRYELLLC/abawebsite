@@ -13,10 +13,21 @@
         .logo { font-size:1.8rem; font-weight:700; color:#09C285; }
         nav a { margin-left:40px; font-weight:500; opacity:0.8; transition:opacity 0.3s; display:inline-flex; align-items:center; gap:8px; }
         nav a:hover { opacity:1; color:#09C285; }
-        .hero { min-height:100vh; display:flex; flex-direction:column; justify-content:center; align-items:center; text-align:center; position:relative; padding:100px 20px 100px; box-sizing:border-box; z-index:2; overflow:visible; }
+        /* Hero jetzt oben ausgerichtet – kein Center mehr */
+        .hero { 
+            display:flex; 
+            flex-direction:column; 
+            align-items:center; 
+            text-align:center; 
+            position:relative; 
+            padding:140px 20px 100px; /* Oben Platz für Header */
+            box-sizing:border-box; 
+            z-index:2; 
+            overflow:visible; 
+            justify-content:flex-start; /* WICHTIG: alles oben anfangen */
+        }
         .horizon-glow { position:absolute; bottom:0; left:0; width:100%; height:300px; background:radial-gradient(ellipse at center, #09C28544, transparent 70%); filter:blur(100px); opacity:0.6; z-index:1; }
-        .tagline { font-size:5rem; font-weight:700; margin:0 0 60px 0; line-height:1.2; z-index:2; color:white; }
-        /* Feature Grid – direkt oben unter dem Tagline, kein großer Abstand */
+        .tagline { font-size:5rem; font-weight:700; margin:0 0 60px 0; line-height:1.2; color:white; }
         .features-hero {
             display:grid;
             grid-template-columns:repeat(auto-fit, minmax(320px, 1fr));
@@ -25,7 +36,7 @@
             width:100%;
             padding:0 50px;
             z-index:2;
-            margin-bottom:100px; /* Kleiner Abstand nach unten */
+            margin-bottom:150px;
         }
         .glow-box {
             background:rgba(0,30,30,0.6);
@@ -164,6 +175,7 @@
             .welcome-text { font-size:3.5rem; margin-bottom:30px; }
             .welcome-loader { width:80%; }
             .tagline { font-size:3.5rem; }
+            .features-hero { gap:30px; padding:0 20px; }
         }
     </style>
 </head>
@@ -189,7 +201,7 @@
         <div class="horizon-glow"></div>
         <h1 class="tagline">Fueling Solana's Rise</h1>
 
-        <!-- Feature Grid – jetzt wieder direkt oben, sichtbar ohne Scrollen -->
+        <!-- Feature Grid – direkt oben, sofort sichtbar -->
         <div class="features-hero">
             <!-- 1. Transparent -->
             <div class="glow-box feature-card">
