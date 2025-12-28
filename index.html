@@ -51,40 +51,11 @@
             from { opacity:0; transform:translateY(20px); }
             to { opacity:1; transform:translateY(0); }
         }
-        .terminal, .voting-section, .whitepaper-section {
+        .voting-section, .whitepaper-section {
             animation: fadeInUp 0.8s ease-out;
         }
         footer { padding:80px 50px; text-align:center; opacity:0.6; font-size:1.1rem; position:relative; z-index:2; }
         canvas#particles { position:fixed; top:0; left:0; width:100%; height:100%; z-index:1; pointer-events:none; }
-        .terminal {
-            width:90%;
-            max-width:800px;
-            margin:50px auto;
-            padding:20px;
-            height:300px;
-            overflow-y:auto;
-            text-align:left;
-            display: flex;
-            flex-direction: column;
-            color-scheme: dark;
-        }
-        .terminal::before {
-            content: "> AUTOBETAGENT BOT LOG";
-            display:block;
-            font-weight:bold;
-            margin-bottom:10px;
-            color:#09C285;
-            text-shadow: 0 0 10px #09C285;
-            order: -1;
-        }
-        .terminal-line {
-            margin:5px 0;
-            animation: fadeIn 0.5s forwards;
-        }
-        @keyframes fadeIn {
-            from { opacity:0; }
-            to { opacity:1; }
-        }
         .voting-section {
             width:90%;
             max-width:1000px;
@@ -243,7 +214,7 @@
             </div>
         </div>
 
-        <!-- Voting Section -->
+        <!-- Community Voting -->
         <div class="glow-box voting-section" id="voting">
             <h2>Community Vote: Which Bet Should We Place?</h2>
             <p class="logged-info">You are logged in – your vote counts!</p>
@@ -275,10 +246,6 @@
             </div>
         </div>
 
-        <div class="glow-box terminal" id="terminal">
-            Loading bot log...
-        </div>
-
         <div class="whitepaper-anchor" id="whitepaper"></div>
 
         <div class="glow-box whitepaper-section">
@@ -295,6 +262,7 @@
     </footer>
 
     <script>
+        // Nur Particles bleiben – Terminal-Log und Supabase komplett entfernt
         const canvas = document.getElementById('particles');
         const ctx = canvas.getContext('2d');
         canvas.width = window.innerWidth;
@@ -339,49 +307,6 @@
         init();
         animate();
         window.addEventListener('resize', () => { canvas.width = window.innerWidth; canvas.height = window.innerHeight; particlesArray.length = 0; init(); });
-
-        const SUPABASE_URL = "https://bmoibbckojdahyxdgttx.supabase.co";
-        const SUPABASE_ANON_KEY = "sb_publishable_DY2yiQ2HxKZYTP1bqejDEw_I0O4Ud0z";
-        async function loadBotLog() {
-            try {
-                const response = await fetch(`${SUPABASE_URL}/rest/v1/bot_logs?order=created_at.desc`, {
-                    headers: {
-                        "apikey": SUPABASE_ANON_KEY,
-                        "Authorization": `Bearer ${SUPABASE_ANON_KEY}`
-                    }
-                });
-                const logs = await response.json();
-                const terminal = document.getElementById('terminal');
-                terminal.innerHTML = '';
-                if (logs.length === 0) {
-                    const lines = [
-                        "[SYSTEM] Preparing launch on pump.fun",
-                        "[SYSTEM] Bot ready – waiting for first fees",
-                        "[INFO] Community vote will decide the Kalshi bet"
-                    ];
-                    lines.forEach(msg => {
-                        const line = document.createElement('div');
-                        line.className = 'terminal-line';
-                        line.textContent = msg;
-                        terminal.appendChild(line);
-                    });
-                } else {
-                    logs.forEach(log => {
-                        const time = new Date(log.created_at).toLocaleTimeString('en-GB', { hour: '2-digit', minute: '2-digit', second: '2-digit' });
-                        const line = document.createElement('div');
-                        line.className = 'terminal-line';
-                        line.textContent = `[${time}] ${log.message}`;
-                        terminal.appendChild(line);
-                    });
-                }
-                terminal.scrollTop = 0;
-            } catch (error) {
-                document.getElementById('terminal').innerHTML = '<div class="terminal-line">Bot preparing for launch...</div>';
-            }
-        }
-
-        loadBotLog();
-        setInterval(loadBotLog, 10000);
     </script>
 </body>
 </html>
