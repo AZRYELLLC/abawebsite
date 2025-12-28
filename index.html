@@ -187,12 +187,6 @@
         html {
             scroll-behavior: smooth;
         }
-        /* Unsichtbarer Anker für besseren Offset */
-        #whitepaper-anchor {
-            position: relative;
-            top: -120px; /* Etwas mehr als Header-Höhe */
-            visibility: hidden;
-        }
     </style>
 </head>
 <body>
@@ -243,12 +237,7 @@
         <div class="glow-box terminal" id="terminal">
             Loading bot log...
         </div>
-
-        <!-- Unsichtbarer Anker für perfekten Scroll-Offset -->
-        <div id="whitepaper-anchor"></div>
-
-        <!-- Whitepaper Section -->
-        <div class="glow-box whitepaper-section">
+        <div class="glow-box whitepaper-section" id="whitepaper">
             <h2>Whitepaper</h2>
             <h3>Introduction</h3>
             <p>AUTOBETAGENT is the first fully automated, on-chain bot on Solana that turns creator royalties into a high-conviction bet via Kalshi prediction markets.</p>
@@ -263,7 +252,6 @@
     </footer>
 
     <script>
-        // (Der JavaScript-Teil bleibt komplett unverändert – wie in der letzten Version)
         const canvas = document.getElementById('particles');
         const ctx = canvas.getContext('2d');
         canvas.width = window.innerWidth;
