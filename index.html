@@ -30,7 +30,7 @@
         .tagline { font-size:5rem; font-weight:700; margin:0 0 80px 0; line-height:1.2; color:white; }
         .features-hero {
             display:grid;
-            grid-template-columns:repeat(4, 1fr); /* 4 Kästchen nebeneinander auf Desktop */
+            grid-template-columns:repeat(4, 1fr); /* 4 nebeneinander auf Desktop */
             gap:50px;
             max-width:1600px;
             width:100%;
@@ -38,17 +38,11 @@
             z-index:2;
             margin-bottom:200px;
         }
-        @media (max-width:1200px) {
-            .features-hero {
-                grid-template-columns:repeat(2, 1fr); /* 2x2 auf Tablet */
-            }
+        @media (max-width:1400px) {
+            .features-hero { grid-template-columns:repeat(2, 1fr); }
         }
         @media (max-width:768px) {
-            .features-hero {
-                grid-template-columns:1fr; /* Untereinander auf Mobile */
-                gap:30px;
-                padding:0 20px;
-            }
+            .features-hero { grid-template-columns:1fr; gap:30px; padding:0 20px; }
         }
         .glow-box {
             background:rgba(0,30,30,0.6);
@@ -69,7 +63,7 @@
             z-index:2;
         }
         .card-icon { font-size:4.5rem; color:#09C285; margin-bottom:30px; text-shadow: 0 0 10px #09C285; filter: drop-shadow(0 0 8px #09C28530); }
-        .feature-card h3 { font-size:2rem; margin:20px 0; color:#09C285; }
+        .feature-card h3 { font-size:2rem; margin:20px 0; color:#09C285; white-space:nowrap; } /* Kein Umbruch bei "100% Transparent" */
         .feature-card p { font-size:1.2rem; opacity:0.9; line-height:1.6; }
         .voting-section {
             width:90%;
@@ -221,12 +215,17 @@
         <div class="horizon-glow"></div>
         <h1 class="tagline">Fueling Solana's Rise</h1>
 
-        <!-- 4 Kästchen nebeneinander oben -->
+        <!-- 4 Kästchen nebeneinander -->
         <div class="features-hero">
             <div class="glow-box feature-card">
                 <i class="fas fa-shield-alt card-icon"></i>
                 <h3>100% Transparent</h3>
                 <p>All claims, swaps, and bets are fully on-chain and verifiable.</p>
+            </div>
+            <div class="glow-box feature-card">
+                <i class="fas fa-users card-icon"></i>
+                <h3>Community Vote</h3>
+                <p>The community decides which Kalshi bet the bot places.</p>
             </div>
             <div class="glow-box feature-card">
                 <i class="fas fa-robot card-icon"></i>
@@ -237,11 +236,6 @@
                 <i class="fas fa-sync-alt card-icon"></i>
                 <h3>Buyback on Win</h3>
                 <p>If the Kalshi bet wins, all profits will be used to buy back $ABAxPUMP tokens.</p>
-            </div>
-            <div class="glow-box feature-card">
-                <i class="fas fa-vote-yea card-icon"></i>
-                <h3>Community Vote</h3>
-                <p>The community decides which Kalshi bet the bot places.</p>
             </div>
         </div>
 
