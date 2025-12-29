@@ -4,8 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>AUTOBETAGENT</title>
-    <!-- Privy SDK -->
-    <script src="https://cdn.jsdelivr.net/npm/@privy-io/js-sdk@1"></script>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
         @import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css');
@@ -13,25 +11,8 @@
         a { color:#fff; text-decoration:none; }
         header { position:fixed; top:0; width:100%; padding:30px 50px; display:flex; justify-content:space-between; align-items:center; z-index:10; box-sizing:border-box; backdrop-filter:blur(10px); }
         .logo { font-size:1.8rem; font-weight:700; color:#09C285; }
-        nav { display:flex; align-items:center; gap:40px; }
-        nav a { font-weight:500; opacity:0.8; transition:opacity 0.3s; display:inline-flex; align-items:center; gap:8px; }
+        nav a { margin-left:40px; font-weight:500; opacity:0.8; transition:opacity 0.3s; display:inline-flex; align-items:center; gap:8px; }
         nav a:hover { opacity:1; color:#09C285; }
-        #privy-login-button {
-            background:#09C285;
-            color:white;
-            padding:10px 20px;
-            border-radius:12px;
-            font-weight:600;
-            cursor:pointer;
-            display:inline-flex;
-            align-items:center;
-            gap:10px;
-            transition:0.3s;
-        }
-        #privy-login-button:hover {
-            background:#07a66d;
-            transform:scale(1.05);
-        }
         .hero {
             display:flex;
             flex-direction:column;
@@ -160,6 +141,7 @@
             .welcome-loader { width:80%; }
             .tagline { font-size:3.5rem; }
         }
+        /* Particles HINTERGRUND – z-index:0 */
         canvas#particles { 
             position:fixed; 
             top:0; 
@@ -186,8 +168,6 @@
             <a href="#home">Home</a>
             <a href="#whitepaper">Whitepaper</a>
             <a href="https://pump.fun/" target="_blank"><i class="fas fa-rocket"></i> pump.fun</a>
-            <!-- Privy Login Button im Header -->
-            <div id="privy-login-button"></div>
         </nav>
     </header>
     <section id="home" class="hero">
@@ -233,33 +213,6 @@
     </footer>
 
     <script>
-        // Privy Initialisierung mit deiner App ID
-        const privy = new Privy({
-            appId: 'cmjrdr5ks01i7ju0cywa9c980',
-            config: {
-                loginMethods: ['twitter', 'wallet'],
-                appearance: {
-                    theme: 'dark',
-                    accentColor: '#09C285',
-                },
-            },
-        });
-
-        // Privy Login Button im Header rendern
-        privy.renderLogin({
-            container: document.getElementById('privy-login-button'),
-        });
-
-        // Optional: Nach Login etwas anzeigen (z. B. Username)
-        privy.on('login', (user) => {
-            let name = 'User';
-            if (user.twitter) name = `@${user.twitter.username}`;
-            else if (user.wallet) name = user.wallet.address.slice(0,6) + '...' + user.wallet.address.slice(-4);
-            // Hier kannst du z. B. den Button ändern
-            document.getElementById('privy-login-button').innerHTML = `<i class="fas fa-user"></i> ${name}`;
-        });
-
-        // Particles
         const canvas = document.getElementById('particles');
         const ctx = canvas.getContext('2d');
         canvas.width = window.innerWidth;
