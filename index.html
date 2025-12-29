@@ -30,7 +30,6 @@
         }
         #privy-login-button:hover {
             background:#07a66d;
-            transform:scale(1.05);
         }
         .hero {
             display:flex;
@@ -186,7 +185,6 @@
             <a href="#home">Home</a>
             <a href="#whitepaper">Whitepaper</a>
             <a href="https://pump.fun/" target="_blank"><i class="fas fa-rocket"></i> pump.fun</a>
-            <!-- Privy Login Button -->
             <div id="privy-login-button"></div>
         </nav>
     </header>
@@ -245,12 +243,12 @@
             },
         });
 
-        // Privy Login Button rendern
+        // Login Button rendern
         privy.renderLogin({
             container: document.getElementById('privy-login-button'),
         });
 
-        // Optional: Nach Login den Button ändern
+        // Nach Login Username anzeigen
         privy.on('login', (user) => {
             let name = 'User';
             if (user.twitter) name = `@${user.twitter.username}`;
@@ -258,7 +256,7 @@
             document.getElementById('privy-login-button').innerHTML = `<i class="fas fa-user"></i> ${name}`;
         });
 
-        // Particles – Hintergrund aktiv
+        // Particles Hintergrund
         const canvas = document.getElementById('particles');
         const ctx = canvas.getContext('2d');
         canvas.width = window.innerWidth;
