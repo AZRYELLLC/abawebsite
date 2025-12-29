@@ -195,6 +195,7 @@
             .welcome-loader { width:80%; }
             .tagline { font-size:3.5rem; }
         }
+        /* Particles hinter dem Inhalt */
         canvas#particles { 
             position:fixed; 
             top:0; 
@@ -256,7 +257,7 @@
             <h2>Community Vote: Which Bet Should We Place?</h2>
             <p class="logged-info" id="logged-info">Please log in with X to vote</p>
 
-            <!-- Privy Login Button -->
+            <!-- Privy Login -->
             <div id="privy-login"></div>
 
             <div class="voting-options" id="voting-options" style="opacity:0.5; pointer-events:none;">
@@ -304,7 +305,7 @@
     </footer>
 
     <script>
-        // Privy mit deiner App ID
+        // Privy Initialisierung mit deiner App ID
         const privy = new Privy({
             appId: 'cmjrdr5ks01i7ju0cywa9c980',
             config: {
@@ -325,7 +326,7 @@
             container: document.getElementById('privy-login'),
         });
 
-        // Nach erfolgreichem Login
+        // Nach Login
         privy.on('login', (user) => {
             const username = user.twitter?.username ? `@${user.twitter.username}` : 'User';
             loggedInfo.textContent = `Logged in as ${username} – your vote counts!`;
@@ -335,17 +336,7 @@
             document.querySelectorAll('.voting-option').forEach(el => el.classList.add('active'));
         });
 
-        // Vote Demo (kann später mit Supabase verbunden werden)
-        document.querySelectorAll('input[name="vote"]').forEach(radio => {
-            radio.addEventListener('change', () => {
-                if (privy.user) {
-                    voteStatus.textContent = 'Vote saved!';
-                    voteStatus.style.color = '#09C285';
-                }
-            });
-        });
-
-        // Particles – Hintergrund wieder aktiv
+        // Particles – Hintergrund aktiv
         const canvas = document.getElementById('particles');
         const ctx = canvas.getContext('2d');
         canvas.width = window.innerWidth;
