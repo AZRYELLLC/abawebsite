@@ -4,10 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>AUTOBETAGENT</title>
-    <!-- Privy SDK -->
-    <script src="https://cdn.jsdelivr.net/npm/@privy-io/js-sdk@1"></script>
     <style>
-        /* (Dein kompletter Style aus vorher – unverändert) */
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
         @import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css');
         body { margin:0; padding:0; font-family:'Inter', sans-serif; background:#000; color:#fff; overflow-x:hidden; position:relative; }
@@ -75,13 +72,7 @@
             padding:40px;
             text-align:center;
         }
-        .voting-section h2 { font-size:2.5rem; color:#09C285; margin-bottom:20px; }
-        .logged-info {
-            font-size:1.2rem;
-            opacity:0.8;
-            margin-bottom:40px;
-            color:#4DE4B2;
-        }
+        .voting-section h2 { font-size:2.5rem; color:#09C285; margin-bottom:40px; }
         .voting-options {
             display:grid;
             grid-template-columns:repeat(auto-fit, minmax(300px, 1fr));
@@ -93,13 +84,6 @@
             border:2px solid #09C28533;
             border-radius:20px;
             transition: all 0.3s ease;
-            opacity:0.5;
-            pointer-events:none;
-        }
-        .voting-option.active {
-            opacity:1;
-            pointer-events:all;
-            border-color:#09C285;
         }
         .voting-option:hover {
             border-color:#09C285;
@@ -248,15 +232,9 @@
             </div>
         </div>
 
-        <!-- Community Voting mit Privy Login -->
         <div class="glow-box voting-section" id="voting">
             <h2>Community Vote: Which Bet Should We Place?</h2>
-            <p class="logged-info" id="logged-info">Please log in to vote</p>
-
-            <!-- Privy Login wird hier gerendert -->
-            <div id="privy-login"></div>
-
-            <div class="voting-options" id="voting-options" style="opacity:0.5; pointer-events:none;">
+            <div class="voting-options">
                 <div class="voting-option">
                     <label>
                         <input type="radio" name="vote" value="sol150">
@@ -282,7 +260,6 @@
                     </label>
                 </div>
             </div>
-            <p id="vote-status" style="margin-top:20px; font-size:1.1rem; opacity:0.8;"></p>
         </div>
 
         <div class="whitepaper-anchor" id="whitepaper"></div>
@@ -301,52 +278,6 @@
     </footer>
 
     <script>
-        // Privy Initialisierung mit deiner App ID
-        const privy = new Privy({
-            appId: 'cmjrdr5ks01i7ju0cywa9c980', // Deine App ID
-            config: {
-                loginMethods: ['twitter', 'wallet'],
-                appearance: {
-                    theme: 'dark',
-                    accentColor: '#09C285',
-                },
-            },
-        });
-
-        const loggedInfo = document.getElementById('logged-info');
-        const votingOptions = document.getElementById('voting-options');
-        const voteStatus = document.getElementById('vote-status');
-
-        // Privy Login Button rendern
-        privy.renderLogin({
-            container: document.getElementById('privy-login'),
-        });
-
-        // Nach erfolgreichem Login
-        privy.on('login', (user) => {
-            let name = 'User';
-            if (user.twitter) {
-                name = `@${user.twitter.username}`;
-            } else if (user.wallet) {
-                name = user.wallet.address.slice(0,6) + '...' + user.wallet.address.slice(-4);
-            }
-            loggedInfo.textContent = `Logged in as ${name} – your vote counts!`;
-            votingOptions.style.opacity = '1';
-            votingOptions.style.pointerEvents = 'all';
-            document.querySelectorAll('.voting-option').forEach(el => el.classList.add('active'));
-        });
-
-        // Vote Demo (kann später mit Supabase verbunden werden)
-        document.querySelectorAll('input[name="vote"]').forEach(radio => {
-            radio.addEventListener('change', () => {
-                if (privy.user) {
-                    voteStatus.textContent = 'Vote saved!';
-                    voteStatus.style.color = '#09C285';
-                }
-            });
-        });
-
-        // Particles (unverändert)
         const canvas = document.getElementById('particles');
         const ctx = canvas.getContext('2d');
         canvas.width = window.innerWidth;
