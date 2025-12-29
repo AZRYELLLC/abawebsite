@@ -45,6 +45,7 @@
         }
         @media (max-width:768px) {
             .features-hero { grid-template-columns:1fr; gap:30px; padding:0 20px; }
+            .tagline { font-size:3.5rem; }
         }
         .glow-box {
             background:rgba(0,30,30,0.6);
@@ -75,12 +76,13 @@
             text-align:center;
         }
         .voting-section h2 { font-size:2.5rem; color:#09C285; margin-bottom:20px; }
-        .login-required {
-            font-size:1.4rem;
+        .logged-info {
+            font-size:1.2rem;
             opacity:0.8;
             margin-bottom:40px;
+            color:#4DE4B2;
         }
-        #privy-login-container {
+        #privy-login {
             margin-bottom:40px;
         }
         .voting-options {
@@ -249,10 +251,10 @@
             </div>
         </div>
 
-        <!-- Voting – nur sichtbar nach X Login -->
+        <!-- Voting – gesperrt bis Login -->
         <div class="glow-box voting-section" id="voting">
             <h2>Community Vote: Which Bet Should We Place?</h2>
-            <p class="login-required" id="login-required">Please log in with X to vote</p>
+            <p class="logged-info" id="logged-info">Please log in with X to vote</p>
 
             <!-- Privy Login Button -->
             <div id="privy-login"></div>
@@ -314,7 +316,7 @@
             },
         });
 
-        const loginRequired = document.getElementById('login-required');
+        const loggedInfo = document.getElementById('logged-info');
         const votingOptions = document.getElementById('voting-options');
         const voteStatus = document.getElementById('vote-status');
 
@@ -326,14 +328,24 @@
         // Nach erfolgreichem Login
         privy.on('login', (user) => {
             const username = user.twitter?.username ? `@${user.twitter.username}` : 'User';
-            loginRequired.textContent = `Logged in as ${username} – your vote counts!`;
-            loginRequired.style.color = '#4DE4B2';
+            loggedInfo.textContent = `Logged in as ${username} – your vote counts!`;
+            loggedInfo.style.color = '#4DE4B2';
             votingOptions.style.opacity = '1';
             votingOptions.style.pointerEvents = 'all';
             document.querySelectorAll('.voting-option').forEach(el => el.classList.add('active'));
         });
 
-        // Particles
+        // Vote Demo (kann später mit Supabase verbunden werden)
+        document.querySelectorAll('input[name="vote"]').forEach(radio => {
+            radio.addEventListener('change', () => {
+                if (privy.user) {
+                    voteStatus.textContent = 'Vote saved!';
+                    voteStatus.style.color = '#09C285';
+                }
+            });
+        });
+
+        // Particles – Hintergrund wieder aktiv
         const canvas = document.getElementById('particles');
         const ctx = canvas.getContext('2d');
         canvas.width = window.innerWidth;
