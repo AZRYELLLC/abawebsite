@@ -4,7 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>AUTOBETAGENT</title>
+    <!-- Privy SDK -->
+    <script src="https://cdn.jsdelivr.net/npm/@privy-io/js-sdk@1"></script>
     <style>
+        /* (Dein kompletter Style aus vorher – unverändert) */
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
         @import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css');
         body { margin:0; padding:0; font-family:'Inter', sans-serif; background:#000; color:#fff; overflow-x:hidden; position:relative; }
@@ -30,7 +33,7 @@
         .tagline { font-size:5rem; font-weight:700; margin:0 0 80px 0; line-height:1.2; color:white; }
         .features-hero {
             display:grid;
-            grid-template-columns:repeat(4, 1fr); /* 4 nebeneinander auf Desktop */
+            grid-template-columns:repeat(4, 1fr);
             gap:50px;
             max-width:1600px;
             width:100%;
@@ -63,7 +66,7 @@
             z-index:2;
         }
         .card-icon { font-size:4.5rem; color:#09C285; margin-bottom:30px; text-shadow: 0 0 10px #09C285; filter: drop-shadow(0 0 8px #09C28530); }
-        .feature-card h3 { font-size:2rem; margin:20px 0; color:#09C285; white-space:nowrap; } /* Kein Umbruch bei "100% Transparent" */
+        .feature-card h3 { font-size:2rem; margin:20px 0; color:#09C285; white-space:nowrap; }
         .feature-card p { font-size:1.2rem; opacity:0.9; line-height:1.6; }
         .voting-section {
             width:90%;
@@ -90,6 +93,13 @@
             border:2px solid #09C28533;
             border-radius:20px;
             transition: all 0.3s ease;
+            opacity:0.5;
+            pointer-events:none;
+        }
+        .voting-option.active {
+            opacity:1;
+            pointer-events:all;
+            border-color:#09C285;
         }
         .voting-option:hover {
             border-color:#09C285;
@@ -215,7 +225,6 @@
         <div class="horizon-glow"></div>
         <h1 class="tagline">Fueling Solana's Rise</h1>
 
-        <!-- 4 Kästchen nebeneinander -->
         <div class="features-hero">
             <div class="glow-box feature-card">
                 <i class="fas fa-shield-alt card-icon"></i>
@@ -223,14 +232,14 @@
                 <p>All claims, swaps, and bets are fully on-chain and verifiable.</p>
             </div>
             <div class="glow-box feature-card">
-                <i class="fas fa-users card-icon"></i>
-                <h3>Community Vote</h3>
-                <p>The community decides which Kalshi bet the bot places.</p>
-            </div>
-            <div class="glow-box feature-card">
                 <i class="fas fa-robot card-icon"></i>
                 <h3>Fully Automated</h3>
                 <p>Bot claims fees → swaps to USDC → places Kalshi bet automatically.</p>
+            </div>
+            <div class="glow-box feature-card">
+                <i class="fas fa-vote-yea card-icon"></i>
+                <h3>Community Vote</h3>
+                <p>The community decides which Kalshi bet the bot places.</p>
             </div>
             <div class="glow-box feature-card">
                 <i class="fas fa-sync-alt card-icon"></i>
@@ -239,10 +248,15 @@
             </div>
         </div>
 
+        <!-- Community Voting mit Privy Login -->
         <div class="glow-box voting-section" id="voting">
             <h2>Community Vote: Which Bet Should We Place?</h2>
-            <p class="logged-info">You are logged in – your vote counts!</p>
-            <div class="voting-options">
+            <p class="logged-info" id="logged-info">Please log in to vote</p>
+
+            <!-- Privy Login wird hier gerendert -->
+            <div id="privy-login"></div>
+
+            <div class="voting-options" id="voting-options" style="opacity:0.5; pointer-events:none;">
                 <div class="voting-option">
                     <label>
                         <input type="radio" name="vote" value="sol150">
@@ -268,6 +282,7 @@
                     </label>
                 </div>
             </div>
+            <p id="vote-status" style="margin-top:20px; font-size:1.1rem; opacity:0.8;"></p>
         </div>
 
         <div class="whitepaper-anchor" id="whitepaper"></div>
@@ -286,6 +301,52 @@
     </footer>
 
     <script>
+        // Privy Initialisierung mit deiner App ID
+        const privy = new Privy({
+            appId: 'cmjrdr5ks01i7ju0cywa9c980', // Deine App ID
+            config: {
+                loginMethods: ['twitter', 'wallet'],
+                appearance: {
+                    theme: 'dark',
+                    accentColor: '#09C285',
+                },
+            },
+        });
+
+        const loggedInfo = document.getElementById('logged-info');
+        const votingOptions = document.getElementById('voting-options');
+        const voteStatus = document.getElementById('vote-status');
+
+        // Privy Login Button rendern
+        privy.renderLogin({
+            container: document.getElementById('privy-login'),
+        });
+
+        // Nach erfolgreichem Login
+        privy.on('login', (user) => {
+            let name = 'User';
+            if (user.twitter) {
+                name = `@${user.twitter.username}`;
+            } else if (user.wallet) {
+                name = user.wallet.address.slice(0,6) + '...' + user.wallet.address.slice(-4);
+            }
+            loggedInfo.textContent = `Logged in as ${name} – your vote counts!`;
+            votingOptions.style.opacity = '1';
+            votingOptions.style.pointerEvents = 'all';
+            document.querySelectorAll('.voting-option').forEach(el => el.classList.add('active'));
+        });
+
+        // Vote Demo (kann später mit Supabase verbunden werden)
+        document.querySelectorAll('input[name="vote"]').forEach(radio => {
+            radio.addEventListener('change', () => {
+                if (privy.user) {
+                    voteStatus.textContent = 'Vote saved!';
+                    voteStatus.style.color = '#09C285';
+                }
+            });
+        });
+
+        // Particles (unverändert)
         const canvas = document.getElementById('particles');
         const ctx = canvas.getContext('2d');
         canvas.width = window.innerWidth;
