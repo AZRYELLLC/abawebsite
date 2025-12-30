@@ -150,16 +150,15 @@
             z-index:0; 
             pointer-events:none; 
         }
-        /* Footer zentriert */
-        footer {
-            padding:80px 50px;
-            text-align:center;
-            opacity:0.6;
-            font-size:1.1rem;
-        }
     </style>
 </head>
 <body>
+    <!-- Audio für Loading-Sound -->
+    <audio id="loading-sound" preload="auto">
+        <source src="https://www.zapsplat.com/wp-content/uploads/2015/sound-effects-14542/zapsplat_science_fiction_neon_light_buzz_14559.mp3" type="audio/mpeg">
+        Your browser does not support the audio element.
+    </audio>
+
     <div class="welcome-screen">
         <div class="welcome-text">WELCOME TO AUTOBETAGENT!</div>
         <div class="welcome-loader">
@@ -219,6 +218,19 @@
     </footer>
 
     <script>
+        // Loading-Sound abspielen
+        const loadingSound = document.getElementById('loading-sound');
+        loadingSound.volume = 0.3; // Nicht zu laut
+        loadingSound.loop = true; // Loopen während Loading
+        loadingSound.play().catch(() => {}); // Autoplay kann blockiert werden – catch verhindert Fehler
+
+        // Sound stoppen, wenn Loading-Screen verschwindet
+        setTimeout(() => {
+            loadingSound.pause();
+            loadingSound.currentTime = 0;
+        }, 4100); // Nach Fade-Out
+
+        // Particles Hintergrund
         const canvas = document.getElementById('particles');
         const ctx = canvas.getContext('2d');
         canvas.width = window.innerWidth;
