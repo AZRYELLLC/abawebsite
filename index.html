@@ -27,30 +27,7 @@
             justify-content:flex-start;
         }
         .horizon-glow { position:absolute; bottom:0; left:0; width:100%; height:300px; background:radial-gradient(ellipse at center, #09C28544, transparent 70%); filter:blur(100px); opacity:0.6; z-index:1; }
-        /* Tagline – schnellere Typing-Animation */
-        .tagline {
-            font-size:5rem;
-            font-weight:700;
-            margin:0 0 80px 0;
-            line-height:1.2;
-            color:white;
-            opacity:0;
-            overflow:hidden;
-            border-right: 4px solid #09C285;
-            white-space:nowrap;
-            width:0;
-            animation: typing 2s steps(20) forwards, blink 0.6s step-end infinite, fadeIn 0.5s forwards;
-            animation-delay: 0.2s;
-        }
-        @keyframes typing {
-            to { width: 100%; }
-        }
-        @keyframes blink {
-            50% { border-color: transparent; }
-        }
-        @keyframes fadeIn {
-            to { opacity:1; }
-        }
+        .tagline { font-size:5rem; font-weight:700; margin:0 0 80px 0; line-height:1.2; color:white; }
         .features-hero {
             display:grid;
             grid-template-columns:repeat(4, 1fr);
@@ -74,19 +51,8 @@
             border-radius:20px;
             backdrop-filter:blur(10px);
             box-shadow: 0 0 15px #09C28522, inset 0 0 10px #09C28511;
-            transition: box-shadow 0.5s ease, transform 0.3s ease, opacity 0.6s ease, transform 0.6s ease;
-            opacity:0;
-            transform: translateY(60px);
+            transition: box-shadow 0.5s ease, transform 0.3s ease;
         }
-        .glow-box.animate {
-            opacity:1;
-            transform: translateY(0);
-        }
-        /* Schnellere Delays für Kästchen */
-        .glow-box:nth-child(1).animate { transition-delay: 0.1s; }
-        .glow-box:nth-child(2).animate { transition-delay: 0.2s; }
-        .glow-box:nth-child(3).animate { transition-delay: 0.3s; }
-        .glow-box:nth-child(4).animate { transition-delay: 0.4s; }
         .glow-box:hover {
             box-shadow: 0 0 40px #09C285, 0 0 80px #09C28588, inset 0 0 30px #09C28566;
             transform: translateY(-8px);
@@ -246,7 +212,6 @@
     </footer>
 
     <script>
-        // Particles Hintergrund
         const canvas = document.getElementById('particles');
         const ctx = canvas.getContext('2d');
         canvas.width = window.innerWidth;
@@ -291,13 +256,6 @@
         init();
         animate();
         window.addEventListener('resize', () => { canvas.width = window.innerWidth; canvas.height = window.innerHeight; particlesArray.length = 0; init(); });
-
-        // Schnellere Kästchen-Animation nach Loading
-        setTimeout(() => {
-            document.querySelectorAll('.glow-box').forEach(box => {
-                box.classList.add('animate');
-            });
-        }, 4100);
     </script>
 </body>
 </html>
