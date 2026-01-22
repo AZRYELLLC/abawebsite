@@ -66,6 +66,46 @@
         .card-icon { font-size:4.5rem; color:#09C285; margin-bottom:30px; text-shadow: 0 0 10px #09C285; filter: drop-shadow(0 0 8px #09C28530); }
         .feature-card h3 { font-size:2rem; margin:20px 0; color:#09C285; white-space:nowrap; }
         .feature-card p { font-size:1.2rem; opacity:0.9; line-height:1.6; }
+        .voting-section {
+            width:90%;
+            max-width:1000px;
+            margin:80px auto;
+            padding:40px;
+            text-align:center;
+            background:rgba(0,30,30,0.6);
+            border:1px solid #09C28533;
+            border-radius:20px;
+            backdrop-filter:blur(10px);
+        }
+        .voting-section h2 { font-size:2.5rem; color:#09C285; margin-bottom:40px; }
+        .voting-options {
+            display:grid;
+            grid-template-columns:repeat(auto-fit, minmax(300px, 1fr));
+            gap:30px;
+        }
+        .voting-option {
+            padding:30px;
+            background:rgba(0,30,30,0.8);
+            border:2px solid #09C28533;
+            border-radius:20px;
+            transition: all 0.3s ease;
+        }
+        .voting-option:hover {
+            border-color:#09C285;
+            box-shadow:0 0 30px #09C28544;
+        }
+        .voting-option label {
+            font-size:1.4rem;
+            cursor:pointer;
+            display:flex;
+            align-items:center;
+            justify-content:center;
+            gap:15px;
+        }
+        .voting-option input[type="radio"] {
+            transform:scale(1.5);
+            accent-color:#09C285;
+        }
         .whitepaper-section {
             width:90%;
             max-width:1000px;
@@ -150,7 +190,6 @@
             z-index:0; 
             pointer-events:none; 
         }
-        /* Footer zentriert */
         footer {
             padding:80px 50px;
             text-align:center;
@@ -172,7 +211,8 @@
         <div class="logo">AUTOBETAGENT</div>
         <nav>
             <a href="#home">Home</a>
-            <a href="https://x.com/i/communities/2004643668183937198" target="_blank">Community</a>
+            <a href="#community">Community</a>
+            <a href="#vote">Vote</a>
             <a href="#whitepaper">Whitepaper</a>
             <a href="https://pump.fun/coin/9ac3adg6BiJxsZHuxQMGYjiJBd7hB9MRSonupK3nCcdQ" target="_blank"><i class="fas fa-rocket"></i> pump.fun</a>
         </nav>
@@ -213,6 +253,37 @@
             <p>All revenue from <strong>$AUTOBETAGENT</strong> will be automatically claimed, swapped to USDC, and used to place the winning community-voted prediction on Kalshi.</p>
             <p>On win → 100% of profits used to buy back and burn $AUTOBETAGENT tokens.</p>
             <p>The future is bright – and the community decides where we bet.</p>
+        </div>
+
+        <!-- Neue Vote-Section -->
+        <div class="glow-box voting-section" id="vote">
+            <h2>Community Vote: Which Bet Should We Place?</h2>
+            <div class="voting-options">
+                <div class="voting-option">
+                    <label>
+                        <input type="radio" name="vote" value="sol150">
+                        SOL hits $150 by end of 2025
+                    </label>
+                </div>
+                <div class="voting-option">
+                    <label>
+                        <input type="radio" name="vote" value="sol200">
+                        SOL hits $200 by end of 2025
+                    </label>
+                </div>
+                <div class="voting-option">
+                    <label>
+                        <input type="radio" name="vote" value="btc100k">
+                        BTC hits $100,000 by end of 2025
+                    </label>
+                </div>
+                <div class="voting-option">
+                    <label>
+                        <input type="radio" name="vote" value="eth5k">
+                        ETH hits $5,000 by end of 2025
+                    </label>
+                </div>
+            </div>
         </div>
     </section>
     <footer>
