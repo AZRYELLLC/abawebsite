@@ -156,6 +156,30 @@
             opacity:0.6;
             font-size:1.1rem;
         }
+        /* Lounge Game Section */
+        .lounge-section {
+            width:90%;
+            max-width:1000px;
+            margin:80px auto;
+            padding:40px;
+            text-align:center;
+            background:rgba(0,30,30,0.6);
+            border:1px solid #09C28533;
+            border-radius:20px;
+            backdrop-filter:blur(10px);
+        }
+        .lounge-section h2 { font-size:2.5rem; color:#09C285; margin-bottom:20px; }
+        #game-canvas {
+            background:#0a1a1a;
+            border:2px solid #09C285;
+            border-radius:10px;
+            margin-top:20px;
+        }
+        .game-instruction {
+            font-size:1.1rem;
+            opacity:0.8;
+            margin-top:10px;
+        }
     </style>
 </head>
 <body>
@@ -215,12 +239,20 @@
             <p>On win → 100% of profits used to buy back and burn $AUTOBETAGENT tokens.</p>
             <p>The future is bright – and the community decides where we bet.</p>
         </div>
+
+        <!-- Lounge Game Section -->
+        <div class="lounge-section" id="lounge">
+            <h2>Lounge</h2>
+            <p class="game-instruction">Use arrow keys or WASD to move your character around the room!</p>
+            <canvas id="game-canvas" width="600" height="400"></canvas>
+        </div>
     </section>
     <footer>
         © 2026 AUTOBETAGENT • Not financial advice • All transactions on-chain and publicly verifiable
     </footer>
 
     <script>
+        // Particles Hintergrund
         const canvas = document.getElementById('particles');
         const ctx = canvas.getContext('2d');
         canvas.width = window.innerWidth;
@@ -265,6 +297,101 @@
         init();
         animate();
         window.addEventListener('resize', () => { canvas.width = window.innerWidth; canvas.height = window.innerHeight; particlesArray.length = 0; init(); });
+
+        // Pixel Game in Lounge
+        const gameCanvas = document.getElementById('game-canvas');
+        const gameCtx = gameCanvas.getContext('2d');
+        const tileSize = 20;
+        const player = {
+            x: 5 * tileSize,
+            y: 10 * tileSize,
+            speed: 3,
+            color: '#09C285'
+        };
+        const keys = {};
+
+        // Room layout (walls = 1, floor = 0, computer = 2)
+        const room = [
+            [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],
+            [1,0,0,0,0,0,0,0,0,0,0,0,0,0,1],
+            [1,0,0,0,0,0,0,0,0,0,0,0,0,0,1],
+            [1,0,0,0,0,0,0,0,0,0,0,0,0,0,1],
+            [1,0,0,0,0,0,0,0,0,0,0,0,0,0,1],
+            [1,0,0,0,0,0,0,0,0,0,0,0,0,0,1],
+            [1,0,0,0,0,0,0,0,0,0,0,0,0,0,1],
+            [1,0,0,0,0,0,0,0,0,0,0,0,0,0,1],
+            [1,0,0,0,0,0,0,0,0,0,0,0,0,0,1],
+            [1,0,0,0,0,0,0,0,0,0,0,0,0,0,1],
+            [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1]
+        ];
+
+        window.addEventListener('keydown', e => keys[e.key.toLowerCase()] = true);
+        window.addEventListener('keyup', e => keys[e.key.toLowerCase()] = false);
+
+        function drawRoom() {
+            for (let y = 0; y < room.length; y++) {
+                for (let x = 0; x < room[y].length; x++) {
+                    if (room[y][x] === 1) {
+                        gameCtx.fillStyle = '#0a1a1a';
+                        gameCtx.fillRect(x * tileSize, y * tileSize, tileSize, tileSize);
+                    } else if (room[y][x] === 2) {
+                        gameCtx.fillStyle = '#09C285';
+                        gameCtx.fillRect(x * tileSize + 4, y * tileSize + 4, tileSize - 8, tileSize - 8);
+                    } else {
+                        gameCtx.fillStyle = '#001111';
+                        gameCtx.fillRect(x * tileSize, y * tileSize, tileSize, tileSize);
+                    }
+                }
+            }
+        }
+
+        function drawPlayer() {
+            gameCtx.fillStyle = player.color;
+            gameCtx.fillRect(player.x, player.y, tileSize, tileSize);
+            gameCtx.fillStyle = '#000';
+            gameCtx.fillRect(player.x + 4, player.y + 4, tileSize - 8, tileSize - 8);
+            gameCtx.fillStyle = '#fff';
+            gameCtx.fillRect(player.x + 6, player.y + 6, tileSize - 12, tileSize - 12);
+        }
+
+        function update() {
+            let newX = player.x;
+            let newY = player.y;
+
+            if (keys['arrowup'] || keys['w']) newY -= player.speed;
+            if (keys['arrowdown'] || keys['s']) newY += player.speed;
+            if (keys['arrowleft'] || keys['a']) newX -= player.speed;
+            if (keys['arrowright'] || keys['d']) newX += player.speed;
+
+            // Collision detection
+            const playerTileX = Math.floor(newX / tileSize);
+            const playerTileY = Math.floor(newY / tileSize);
+            const playerTileX2 = Math.floor((newX + tileSize - 1) / tileSize);
+            const playerTileY2 = Math.floor((newY + tileSize - 1) / tileSize);
+
+            if (room[playerTileY][playerTileX] !== 1 && room[playerTileY][playerTileX2] !== 1 &&
+                room[playerTileY2][playerTileX] !== 1 && room[playerTileY2][playerTileX2] !== 1) {
+                player.x = newX;
+                player.y = newY;
+            }
+
+            // Check if near computer (tile 2)
+            if (room[playerTileY][playerTileX] === 2 || room[playerTileY2][playerTileX] === 2) {
+                document.getElementById('game-canvas').title = 'Revenue detected!';
+            } else {
+                document.getElementById('game-canvas').title = '';
+            }
+        }
+
+        function gameLoop() {
+            update();
+            gameCtx.clearRect(0, 0, gameCanvas.width, gameCanvas.height);
+            drawRoom();
+            drawPlayer();
+            requestAnimationFrame(gameLoop);
+        }
+
+        gameLoop();
     </script>
 </body>
 </html>
