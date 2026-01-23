@@ -4,8 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>AUTOBETAGENT</title>
-    <!-- Privy SDK -->
-    <script src="https://cdn.jsdelivr.net/npm/@privy-io/js-sdk@1"></script>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
         @import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css');
@@ -78,57 +76,6 @@
         .whitepaper-section h2 { font-size:2.5rem; color:#09C285; margin-bottom:30px; text-align:center; }
         .whitepaper-section h3 { font-size:1.8rem; color:#09C285; margin:30px 0 15px 0; }
         .whitepaper-section p { font-size:1.2rem; line-height:1.8; opacity:0.9; margin-bottom:20px; }
-        .voting-section {
-            width:90%;
-            max-width:1000px;
-            margin:80px auto;
-            padding:40px;
-            text-align:center;
-            background:rgba(0,30,30,0.6);
-            border:1px solid #09C28533;
-            border-radius:20px;
-            backdrop-filter:blur(10px);
-        }
-        .voting-section h2 { font-size:2.5rem; color:#09C285; margin-bottom:20px; }
-        .login-required {
-            font-size:1.4rem;
-            opacity:0.8;
-            margin-bottom:40px;
-        }
-        .voting-options {
-            display:grid;
-            grid-template-columns:repeat(auto-fit, minmax(300px, 1fr));
-            gap:30px;
-            opacity:0.5;
-            pointer-events:none;
-        }
-        .voting-options.active {
-            opacity:1;
-            pointer-events:auto;
-        }
-        .voting-option {
-            padding:30px;
-            background:rgba(0,30,30,0.8);
-            border:2px solid #09C28533;
-            border-radius:20px;
-            transition: all 0.3s ease;
-        }
-        .voting-option:hover {
-            border-color:#09C285;
-            box-shadow:0 0 30px #09C28544;
-        }
-        .voting-option label {
-            font-size:1.4rem;
-            cursor:pointer;
-            display:flex;
-            align-items:center;
-            justify-content:center;
-            gap:15px;
-        }
-        .voting-option input[type="radio"] {
-            transform:scale(1.5);
-            accent-color:#09C285;
-        }
         html {
             scroll-behavior: smooth;
         }
@@ -268,74 +215,12 @@
             <p>On win → 100% of profits used to buy back and burn $AUTOBETAGENT tokens.</p>
             <p>The future is bright – and the community decides where we bet.</p>
         </div>
-
-        <!-- Vote-Section mit X-Login -->
-        <div class="glow-box voting-section" id="vote">
-            <h2>Community Vote: Which Bet Should We Place?</h2>
-            <p class="login-required" id="login-status">Login with X to vote</p>
-            <div id="privy-login-container"></div>
-            <div class="voting-options" id="voting-options">
-                <div class="voting-option">
-                    <label>
-                        <input type="radio" name="vote" value="sol150">
-                        SOL hits $150 by end of 2025
-                    </label>
-                </div>
-                <div class="voting-option">
-                    <label>
-                        <input type="radio" name="vote" value="sol200">
-                        SOL hits $200 by end of 2025
-                    </label>
-                </div>
-                <div class="voting-option">
-                    <label>
-                        <input type="radio" name="vote" value="btc100k">
-                        BTC hits $100,000 by end of 2025
-                    </label>
-                </div>
-                <div class="voting-option">
-                    <label>
-                        <input type="radio" name="vote" value="eth5k">
-                        ETH hits $5,000 by end of 2025
-                    </label>
-                </div>
-            </div>
-        </div>
     </section>
     <footer>
         © 2026 AUTOBETAGENT • Not financial advice • All transactions on-chain and publicly verifiable
     </footer>
 
     <script>
-        // Privy Initialisierung mit deiner App ID
-        const privy = new Privy({
-            appId: 'cmjrdr5ks01i7ju0cywa9c980', // Deine App ID hier
-            config: {
-                loginMethods: ['twitter'],
-                appearance: {
-                    theme: 'dark',
-                    accentColor: '#09C285',
-                },
-            },
-        });
-
-        const loginStatus = document.getElementById('login-status');
-        const votingOptions = document.getElementById('voting-options');
-
-        // Privy Login Button rendern
-        privy.renderLogin({
-            container: document.getElementById('privy-login-container'),
-        });
-
-        // Nach Login
-        privy.on('login', (user) => {
-            const username = user.twitter?.username ? `@${user.twitter.username}` : 'User';
-            loginStatus.textContent = `Logged in as ${username} – your vote counts!`;
-            loginStatus.style.color = '#4DE4B2';
-            votingOptions.classList.add('active');
-        });
-
-        // Particles Hintergrund
         const canvas = document.getElementById('particles');
         const ctx = canvas.getContext('2d');
         canvas.width = window.innerWidth;
